@@ -1,0 +1,44 @@
+<div>
+    <p-card [style]="{ padding: '0', 'background-color': '#FFFFFF', 'border-top': '10px solid #1ba8fa', 'margin-bottom': '2rem' }">
+        <div style="text-align: center">
+            <h2>Dashboard</h2>
+        </div>
+    </p-card>
+    <p-card [style]="{ padding: '0', 'background-color': '#FFFFFF', 'border-left': '10px solid #1ba8fa', 'margin-bottom': '2rem' }">
+        <div style="text-align: center">
+            <p-chart type="line" [data]="data" [options]="options" class="h-[30rem]"/>
+        </div>
+    </p-card>
+    <p-card [style]="{ padding: '0', 'background-color': '#FFFFFF', 'border-left': '10px solid #1ba8fa' }">
+        <div style="text-align: center">
+            <tr>
+                <td>
+                    <h2>Production totale : </h2>
+                </td>
+                <td>
+                    <p>???</p>
+                    </td>
+                </tr>
+                <tr>
+                <td>
+                    <h2>Consommation totale : </h2>
+                </td>
+                <td>
+                    <p>???</p>
+                </td>
+                </tr>
+            <p-accordion value="0">
+                <p-accordion-panel value="0">
+                    <p-accordion-header>Plus de détails</p-accordion-header>
+                    <p-accordion-content>
+                        <p>
+                            Ce graphique illustre la production et la consommation d'énergie sur une période donnée.
+                            La ligne bleue représente la production d'énergie solaire, tandis que la ligne rouge en pointillés indique la consommation d'énergie.
+                            Vous pouvez analyser les tendances mensuelles pour optimiser l'utilisation de l'énergie solaire.
+                        </p>
+                    </p-accordion-content>
+                </p-accordion-panel>
+            </p-accordion>
+        </div>
+    </p-card>
+</div>

@@ -1,12 +1,23 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component} from '@angular/core';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { Login } from "./login/login";
+import { Dashboard } from "./dashboard/dashboard";
+import { MenuHeader } from './menu-header/menu-header';
+import { MenuBottom } from './menu-bottom/menu-bottom';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [ButtonModule, CardModule, Login, Dashboard, MenuHeader, MenuBottom],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('solar-manager');
+  
+  public logged : boolean;
+
+  constructor(public login : Login) {
+    this.logged = window.sessionStorage.getItem('logged') === 'true';
+  }
+
 }
