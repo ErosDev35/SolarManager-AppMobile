@@ -5,6 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { Dialog, DialogModule } from 'primeng/dialog';
+import { PrimeIcons, MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-menu-header',

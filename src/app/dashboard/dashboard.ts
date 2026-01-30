@@ -6,7 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { MessageModule } from 'primeng/message';
 import { AccordionModule } from 'primeng/accordion';
-
+import { PrimeIcons, MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-dashboard',
