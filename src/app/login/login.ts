@@ -5,11 +5,12 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { MessageModule } from 'primeng/message';
+import { Drawer, DrawerModule } from 'primeng/drawer';
 
 
 @Component({
   selector: 'app-login',
-  imports: [CardModule, ButtonModule, InputTextModule, FormsModule, MessageModule],
+  imports: [CardModule, ButtonModule, InputTextModule, FormsModule, MessageModule,DrawerModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -18,6 +19,7 @@ import { MessageModule } from 'primeng/message';
 })
 export class Login {
   public logged : boolean = false;
+  public showLogin = !this.logged;
   public username : string = '';
   public password : string = '';
 

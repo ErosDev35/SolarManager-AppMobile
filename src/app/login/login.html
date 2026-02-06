@@ -1,11 +1,5 @@
 <div style="height: 100%; margin-top: 25%">
-  <p-card
-    [style]="{ padding: '0', 'background-color': '#0099f2', 'border-bottom': '10px solid #1ba8fa' }"
-  >
-    <div style="text-align: center">
-      <h2>Login</h2>
-      <p>Welcome to the login page.</p>
-    </div>
+  <!--
     <div style="text-align: center">
       <div class="card flex justify-center">
         <div class="flex flex-col gap-2">
@@ -41,5 +35,46 @@
     <div style="text-align: center">
       <p-button label="Se connecter" [rounded]="true" severity="primary" (click)="onLogin()" />
     </div>
-  </p-card>
+    -->
+  <p-drawer [(visible)]="showLogin" position="bottom" [style]="{'border':'0', 'height':'75vh', 'border-radius':'5% 5% 0% 0%', 'text-align':'center','justify-center':'center'}" [closable]="false" [closeOnEscape]="false" [modal]="false">
+      <h1>Bonjour !</h1>
+      <h3 style="margin-bottom: 15vh;">Veuillez vous connecter</h3>
+      <div style="text-align: center; margin-bottom: 0%;">
+        <div class="card flex justify-center">
+          <div class="flex flex-col gap-2">
+            <label for="username" style="margin-right: 5%">Username</label>
+            <input
+              type="text"
+              pInputText
+              [(ngModel)]="username"
+              name="username"
+              id="username"
+              placeholder="Entrez votre nom d'utilisateur"
+              class="form-input"
+            />
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center">
+      <div class="card flex justify-center">
+        <div class="flex flex-col gap-2">
+          <label for="password" style="margin-right: 5%">Password</label>
+          <input
+            type="password"
+            pInputText
+            [(ngModel)]="password"
+            name="password"
+            id="password"
+            placeholder="Entrez votre mot de passe"
+            class="form-input"
+          />
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center">
+      <p-button [rounded]="true" severity="primary" (click)="onLogin()">
+        <p style="margin: 0;">Se connecter</p>
+      </p-button>
+    </div>
+  </p-drawer>
 </div>
