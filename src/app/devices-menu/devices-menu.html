@@ -1,0 +1,32 @@
+<div class="card flex justify-center">
+    <p-accordion value="0">
+            <p-accordion-panel value="1">
+            <p-accordion-header>Vos Panneaux Solaires</p-accordion-header>
+            <p-accordion-content>
+                <p>Vous n'avez pas encore ajouté de panneau solaire à votre compte.</p>
+                <p-scroller styleClass="border-1 surface-border" scrollHeight="200px" [items]="mppt" [itemSize]="50">
+                    <ng-template pTemplate="item" let-item let-options="options">
+                        <p-card [style]="{'margin-bottom':'5%','border-left': '10px solid #1ba8fa'}">
+                            {{ item.name }} {{ item.production }} {{ item.productionRate }}
+                        </p-card>
+                    </ng-template>
+                </p-scroller>
+            </p-accordion-content>
+        </p-accordion-panel>
+    </p-accordion>
+    <p-accordion>
+        <p-accordion-panel value="0">
+            <p-accordion-header>Vos Batteries</p-accordion-header>
+            <p-accordion-content>
+                <p>Vous n'avez pas encore ajouté de batterie à votre compte.</p>
+                <p-scroller styleClass="border-1 surface-border" scrollHeight="200px" [items]="batteries" [itemSize]="50">
+                    <ng-template pTemplate="item" let-item let-options="options">
+                        <p-card [style]="{'margin-bottom':'5%','border-left': '10px solid #1ba8fa'}">
+                            {{ item.name }} {{ item.capacity }} {{ item.currentCharge }}
+                        </p-card>
+                    </ng-template>
+                </p-scroller>
+            </p-accordion-content>
+            </p-accordion-panel>
+    </p-accordion>
+</div>

@@ -7,16 +7,30 @@ import { FormsModule } from '@angular/forms';
 import { MessageModule } from 'primeng/message';
 import { AccordionModule } from 'primeng/accordion';
 import { PrimeIcons, MenuItem } from 'primeng/api';
+import { SelectModule, SelectItem } from 'primeng/select';
+
+interface timeFrame {
+    name: string;
+    code: string;
+}
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CardModule, ButtonModule, InputTextModule, FormsModule, MessageModule, ChartModule, AccordionModule],
+  imports: [CardModule, ButtonModule, InputTextModule, FormsModule, MessageModule, ChartModule, AccordionModule, SelectModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
 export class Dashboard {
   data: any;
   options: any;
+
+  timeFrameList: timeFrame[] = [
+            { name: 'Ce jour-ci', code: 'today' },
+            { name: 'Cette semaine', code: 'week' },
+            { name: 'Ce mois-ci', code: 'month' },
+            { name: 'Cette année', code: 'year' }
+        ];
+  selectedTimeframe: timeFrame | undefined;
 
     ngOnInit() {
         this.initChart();
