@@ -26,6 +26,7 @@ export class MenuHeader {
   }
   disconnect() : void{
     window.sessionStorage.setItem('logged', 'false');
+    window.sessionStorage.setItem('introShowed', 'false');
     window.location.reload();
   }
 }

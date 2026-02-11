@@ -8,6 +8,8 @@ import { MessageModule } from 'primeng/message';
 import { AccordionModule } from 'primeng/accordion';
 import { PrimeIcons, MenuItem } from 'primeng/api';
 import { SelectModule, SelectItem } from 'primeng/select';
+import { Mppt } from '../entity/mppt';
+import * as data from '../data.json'
 
 interface timeFrame {
     name: string;

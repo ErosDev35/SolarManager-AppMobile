@@ -1,5 +1,8 @@
-@if (!logged) {
-      <app-login></app-login>
+@if(!introShowed){
+  <app-intro-cutscene></app-intro-cutscene>
+}
+@if (!logged && introShowed) {
+  <app-login></app-login>
 }
 @if (logged) {
   <app-menu-header></app-menu-header>

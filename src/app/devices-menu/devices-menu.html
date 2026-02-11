@@ -1,32 +1,35 @@
 <div class="card flex justify-center">
-    <p-accordion value="0">
-            <p-accordion-panel value="1">
-            <p-accordion-header>Vos Panneaux Solaires</p-accordion-header>
+    <p-accordion value="0" [style]="{'padding':'0'}">
+            <p-accordion-panel value="0" [style]="{'width':'45vh','margin-left':'-4vh'}">
+            <p-accordion-header [style]="{'box-shadow':'0px 0px 10px rgba(0, 0, 0, 0.25)'}">Vos Panneaux Solaires</p-accordion-header>
             <p-accordion-content>
-                <p>Vous n'avez pas encore ajouté de panneau solaire à votre compte.</p>
-                <p-scroller styleClass="border-1 surface-border" scrollHeight="200px" [items]="mppt" [itemSize]="50">
+                @if(!anyMpptAvailable){
+                    <p>Vous n'avez pas encore ajouté de panneau solaire à votre compte.</p>
+                }
+                <p-scroller styleClass="border-1 surface-border" scrollHeight="70vh" [items]="mppt" [itemSize]="50" [style]="{'margin-top':'5%'}">
                     <ng-template pTemplate="item" let-item let-options="options">
-                        <p-card [style]="{'margin-bottom':'5%','border-left': '10px solid #1ba8fa'}">
+                        <p-accordion>
+                            <p-accordion-panel value="1.1" [style]="{'width':'100%'}">
+                            <p-accordion-header><p-card [style]="{'margin-bottom':'5%','border-left': '10px solid #1ba8fa', 'width':'32.5vh', 'margin-left':'-2vh'}">
                             {{ item.name }} {{ item.production }} {{ item.productionRate }}
+                            <p-progressbar [style]="{'margin-top':'5%'}" [value]="50" />
                         </p-card>
+                    </p-accordion-header>
+                    <p-accordion-content>
+                                <p-accordion>
+                            <p-accordion-panel value="1.1" [style]="{'width':'100%'}">
+                            <p-accordion-header>{{item.battery.name}}</p-accordion-header>
+                            <p-accordion-content>
+                                <p-card></p-card>
+                            </p-accordion-content>
+                            </p-accordion-panel>
+                            </p-accordion>
+                    </p-accordion-content>
+                    </p-accordion-panel>
+                    </p-accordion>
                     </ng-template>
                 </p-scroller>
             </p-accordion-content>
         </p-accordion-panel>
-    </p-accordion>
-    <p-accordion>
-        <p-accordion-panel value="0">
-            <p-accordion-header>Vos Batteries</p-accordion-header>
-            <p-accordion-content>
-                <p>Vous n'avez pas encore ajouté de batterie à votre compte.</p>
-                <p-scroller styleClass="border-1 surface-border" scrollHeight="200px" [items]="batteries" [itemSize]="50">
-                    <ng-template pTemplate="item" let-item let-options="options">
-                        <p-card [style]="{'margin-bottom':'5%','border-left': '10px solid #1ba8fa'}">
-                            {{ item.name }} {{ item.capacity }} {{ item.currentCharge }}
-                        </p-card>
-                    </ng-template>
-                </p-scroller>
-            </p-accordion-content>
-            </p-accordion-panel>
     </p-accordion>
 </div>

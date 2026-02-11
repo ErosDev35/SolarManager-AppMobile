@@ -1,7 +1,7 @@
 <div>
     <p-card [style]="{'height':'100%', padding: '0', 'background-color': '#FFFFFF', 'border-left': '10px solid #1ba8fa', 'margin-bottom': '3vh'}">
     </p-card>
-    <p-card [style]="{'height':'100%', padding: '0', 'background-color': '#FFFFFF', 'margin-bottom': '2.5vh'}">
+    <p-card [style]="{'height':'100%', padding: '0', 'background-color': '#FFFFFF', 'margin-bottom': '2.5vh', 'border-radius':'0% 0% 5% 5%'}">
         <tr>
             <td>
                 <i class="pi pi-arrow-circle-down" style="color: rgb(0, 161, 0); font-size: 5vh; margin-left: 4vh;"></i> 
@@ -15,12 +15,12 @@
     </p-card>
     <p-card [style]="{'height':'100%', padding: '0', 'background-color': '#FFFFFF', 'border-left': '10px solid #1ba8fa', 'margin-bottom': '0'}">
         <div style="text-align: center">
-            <p-select [options]="timeFrameList" [(ngModel)]="selectedTimeframe" optionLabel="name" placeholder="Ce jour-ci" fluid></p-select>
             <p-chart type="line" [data]="data" [options]="options" class="h-[30rem]"/>
+            <p-select [options]="timeFrameList" [(ngModel)]="selectedTimeframe" optionLabel="name" placeholder="Ce jour-ci" fluid></p-select>
         </div>
     </p-card>
     
-    <p-card [style]="{'height':'100%', padding: '0', 'background-color': '#FFFFFF', 'margin-bottom': '2rem', 'margin-top': '-1vh', 'width':'95%', 'margin-left':'2vh', 'border-radius':'0% 0% 5% 5%'}">
+    <p-card [style]="{'height':'100%', padding: '0', 'background-color': '#FFFFFF', 'margin-bottom': '2rem', 'margin-top': '2vh', 'width':'95%', 'margin-left':'1.5vh'}">
         <div style="display: flex; align-items: center; justify-content: center; padding: 0; width: 100%;">
             <tr style="width: 100%;">
                 <td style="width: 50%; text-align: center;">

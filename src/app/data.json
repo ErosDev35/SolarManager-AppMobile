@@ -1,0 +1,133 @@
+[
+    {
+        "type": "header",
+        "version": "5.1.1deb5ubuntu1",
+        "comment": "Export to JSON plugin for PHPMyAdmin"
+    },
+    {
+        "type": "database",
+        "name": "SolarManager"
+    },
+    {
+        "type": "table",
+        "name": "battery",
+        "database": "SolarManager",
+        "data": [
+            {
+                "ID": "1",
+                "CAPACITY": "2.4",
+                "DATE": "2025-01-01 08:30:00",
+                "INTENSITY": "50",
+                "NAME": "1",
+                "NBCYCLE": "6000",
+                "STATEOFHEALTH": "50"
+            }
+        ]
+    },
+    {
+        "type": "table",
+        "name": "consumption",
+        "database": "SolarManager",
+        "data": [
+            {
+                "ID": "1",
+                "CONSUMPTION": "6000",
+                "DATE": "2025-01-01 08:30:00",
+                "inverter_id": "1",
+                "provider_id": "1"
+            },
+            {
+                "ID": "2",
+                "CONSUMPTION": "6200",
+                "DATE": "2025-01-01 09:30:00",
+                "inverter_id": "1",
+                "provider_id": "1"
+            },
+            {
+                "ID": "3",
+                "CONSUMPTION": "5800",
+                "DATE": "2025-12-01 10:30:00",
+                "inverter_id": "1",
+                "provider_id": "1"
+            },
+            {
+                "ID": "4",
+                "CONSUMPTION": "6100",
+                "DATE": "2026-01-01 11:30:00",
+                "inverter_id": "1",
+                "provider_id": "1"
+            }
+        ]
+    },
+    {
+        "type": "table",
+        "name": "inverter",
+        "database": "SolarManager",
+        "data": [
+            {
+                "ID": "1",
+                "DATE": "2025-01-01 08:30:00",
+                "ENERGYOUT": "230",
+                "INTENSITYIN": "24",
+                "POWEROUT": "6000"
+            }
+        ]
+    },
+    {
+        "type": "table",
+        "name": "mppt",
+        "database": "SolarManager",
+        "data": [
+            {
+                "ID": "1",
+                "DATE": "2025-01-01 08:30:00",
+                "ENERGYOUT": "1.44",
+                "INTENSITYIN": "15",
+                "INTENSITYOUT": "60",
+                "POWERIN": "45",
+                "STATUS": "BULK",
+                "VOLTAGEIN": "89"
+            }
+        ]
+    },
+    {
+        "type": "table",
+        "name": "production",
+        "database": "SolarManager",
+        "data": [
+            {
+                "ID": "1",
+                "DATE": "2025-01-01 08:30:00",
+                "PRODUCTION": "59",
+                "mppt_id": "1"
+            }
+        ]
+    },
+    {
+        "type": "table",
+        "name": "provider",
+        "database": "SolarManager",
+        "data": [
+            {
+                "ID": "1",
+                "DATE": "2025-01-01 08:30:00",
+                "ENERGY": "6000",
+                "INTENSITY": "230",
+                "POWER": "24"
+            }
+        ]
+    },
+    {
+        "type": "table",
+        "name": "USER",
+        "database": "SolarManager",
+        "data": [
+            {
+                "ID": "1",
+                "TYPE": "Agent",
+                "LOGIN": "HS",
+                "PASSWORD": "secret"
+            }
+        ]
+    }
+]

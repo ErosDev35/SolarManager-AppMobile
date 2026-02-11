@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -17,7 +17,7 @@ import { Drawer, DrawerModule } from 'primeng/drawer';
 @Injectable({
   providedIn: 'root',
 })
-export class Login {
+export class Login{
   public logged : boolean = false;
   public showLogin = !this.logged;
   public username : string = '';
