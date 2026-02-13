@@ -8,8 +8,22 @@ import { MessageModule } from 'primeng/message';
 import { AccordionModule } from 'primeng/accordion';
 import { PrimeIcons, MenuItem } from 'primeng/api';
 import { SelectModule, SelectItem } from 'primeng/select';
+
 import { Mppt } from '../entity/mppt';
-import * as data from '../data.json'
+import { User } from '../entity/user';
+import { Battery } from '../entity/battery';
+import { Consumption } from '../entity/consumption';
+import { EnergyProvider } from '../entity/energyProvider';
+import { Inverter } from '../entity/inverter';
+import { Production } from '../entity/production';
+
+import { UserService } from '../entityServices/userService';
+import { BatteryService } from '../entityServices/batteryService';
+import { ConsumptionService } from '../entityServices/consumptionService';
+import { EnergyProviderService } from '../entityServices/energyProviderService';
+import { InverterService } from '../entityServices/inverterService';
+import { MpptService } from '../entityServices/mpptService';
+import { ProductionService } from '../entityServices/productionService';
 
 interface timeFrame {
     name: string;
@@ -22,40 +36,74 @@ interface timeFrame {
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard {
-  data: any;
+export class Dashboard{
   options: any;
+  data : any;
+  userService : any;
+  batteryService : any;
+  consumptionService : any;
+  energyProviderService : any;
+  inverterService : any;
+  mpptService : any;
+  productionService : any;
 
   timeFrameList: timeFrame[] = [
-            { name: 'Ce jour-ci', code: 'today' },
-            { name: 'Cette semaine', code: 'week' },
-            { name: 'Ce mois-ci', code: 'month' },
-            { name: 'Cette année', code: 'year' }
-        ];
+        { name: 'Ce jour-ci', code: 'today' },
+        { name: 'Cette semaine', code: 'week' },
+        { name: 'Ce mois-ci', code: 'month' },
+        { name: 'Cette année', code: 'year' }
+      ];
   selectedTimeframe: timeFrame | undefined;
+  
+  ngOnInit() {
+      this.init();
+      this.initChart();
+  }
 
-    ngOnInit() {
-        this.initChart();
-    }
-
-    initChart() {
-            this.data = {
-                labels: ['0h:00', '4h:00', '8h:00', '12h:00', '16h:00', '20h:00', '00h:00'],
-                datasets: [
-                    {
-                        label: 'Production',
-                        data: [65, 59, 80, 81, 56, 55, 40, 70, 60, 90, 100, 110, 120],
-                        fill: true,
-                        tension: 0.4
-                    },
-                    {
-                        label: 'Consommation',
-                        data: [28, 48, 40, 19, 86, 27, 90, 60, 80, 70, 100, 95, 130],
-                        fill: false,
-                        borderDash: [5, 5],
-                        tension: 0.4
-                    }
-                ]
-            };
+  initChart(){
+    this.data = {
+      labels: [],
+      datasets: [
+        {
+          label: 'Production',
+          data: [],
+          fill: true,
+          tension: 0.4
+        },
+        {
+          label: 'Consommation',
+          data: [],
+          fill: true,
+          tension: 0.4
         }
+      ]
     }
+    for(let data of this.productionService.GetAll()){
+      this.data.labels.push(data.date);
+      this.data.datasets[0].data.push(data.production);
+      console.log(this.data.labels);
+    }
+    for(let data of this.consumptionService.GetAll()){
+      this.data.datasets[1].data.push(data.consumption);
+      console.log(this.data.labels);
+    }
+  }
+
+  init() {
+    this.userService = new UserService();
+    this.batteryService = new BatteryService();
+    this.consumptionService = new ConsumptionService();
+    this.energyProviderService = new EnergyProviderService();
+    this.inverterService = new InverterService();
+    this.mpptService = new MpptService();
+    this.productionService = new ProductionService();
+
+    console.log(this.userService.GetAll());
+    console.log(this.batteryService.GetAll());
+    console.log(this.consumptionService.GetAll());
+    console.log(this.energyProviderService.GetAll());
+    console.log(this.inverterService.GetAll());
+    console.log(this.mpptService.GetAll());
+    console.log(this.productionService.GetAll());
+  }
+}

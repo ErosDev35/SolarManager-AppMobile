@@ -97,8 +97,20 @@
         "data": [
             {
                 "ID": "1",
-                "DATE": "2025-01-01 08:30:00",
+                "DATE": "08:00:00",
                 "PRODUCTION": "59",
+                "mppt_id": "1"
+            },
+            {
+                "ID": "3",
+                "DATE": "08:30:00",
+                "PRODUCTION": "560",
+                "mppt_id": "1"
+            },
+            {
+                "ID": "4",
+                "DATE": "09:00:00",
+                "PRODUCTION": "5000",
                 "mppt_id": "1"
             }
         ]
@@ -126,6 +138,12 @@
                 "ID": "1",
                 "TYPE": "Agent",
                 "LOGIN": "HS",
+                "PASSWORD": "secret"
+            },
+            {
+                "ID": "2",
+                "TYPE": "Agent",
+                "LOGIN": "MS",
                 "PASSWORD": "secret"
             }
         ]
