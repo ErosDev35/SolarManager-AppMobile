@@ -1,9 +1,12 @@
 import { Mppt } from "../entity/mppt";
 import { DataService } from "./dataService";
+import jsonDataNames from '../assets/dataMpptNames.json';
 
 export class MpptService{
     dataService : any;
+    mppt : any;
     mppts : any[] = [];
+    data: any = null;
 
     GetAll() : any{
         this.dataService = new DataService();
@@ -12,9 +15,18 @@ export class MpptService{
         this.mppts = [];
 
         for(let data of userArray.data){
-            this.mppts.push(new Mppt(data.ID, data.INTENSITYIN, data.INTENSITYOUT, data.VOLTAGEIN, data.STATUS, data.POWERIN, data.ENERGYOUT));
+            this.mppt = new Mppt(data.ID, data.INTENSITYIN, data.INTENSITYOUT, data.VOLTAGEIN, data.STATUS, data.POWERIN, data.ENERGYOUT);
+            this.mppt.name = (this.getMpptName(this.mppt) !== undefined)? this.getMpptName(this.mppt) : this.mppt.id;
+            this.mppts.push(this.mppt);
         }
 
         return this.mppts;
+    }
+
+    getMpptName(mppt : Mppt) {
+        this.data = (jsonDataNames as any).default ?? jsonDataNames;
+        const dataArray = Array.isArray(this.data) ? this.data.find((t: any) => t?.ID === mppt.id) : undefined;
+
+        return (dataArray !== undefined)? dataArray.NAME : undefined;
     }
 }

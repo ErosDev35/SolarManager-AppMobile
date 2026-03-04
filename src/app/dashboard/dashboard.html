@@ -13,7 +13,7 @@
             </td>
         </tr>
     </p-card>
-    <p-card [style]="{'height':'100%', padding: '0', 'background-color': '#FFFFFF', 'border-left': '10px solid #1ba8fa', 'margin-bottom': '0'}">
+    <p-card [style]="{'height':'100%', padding: '0', 'background-color': '#FFFFFF', 'border-left': '10px solid #1ba8fa', 'margin-bottom': '0', 'width':'100%'}">
         <div style="text-align: center">
             <p-chart type="line" [data]="data" [options]="options" class="h-[30rem]"/>
             <p-select [options]="timeFrameList" [(ngModel)]="selectedTimeframe" optionLabel="name" placeholder="Ce jour-ci" fluid></p-select>
@@ -25,15 +25,15 @@
             <tr style="width: 100%;">
                 <td style="width: 50%; text-align: center;">
                     <i class="pi pi-arrow-circle-down" style="color: rgb(0, 161, 0);"></i>
-                    <p> N/a Kwh </p>
+                    <p> {{getLastProduction()}} Kwh </p>
                 </td>
                 <td style="width: 0%; text-align: center;">
                     <i class="pi pi-times" style="color: rgb(0, 161, 0);"></i>
-                    <small> +N/a Kwh </small>
+                    <small> {{getFinalProductionRatio()}} Kwh </small>
                 </td>
                 <td style="width: 50%; text-align: center;">
                     <i class="pi pi-arrow-circle-up" style="color: rgb(255, 0, 0)"></i>
-                    <p> N/a Kwh </p>
+                    <p> {{getLastConsommation()}} Kwh </p>
                 </td>
             </tr>
         </div>

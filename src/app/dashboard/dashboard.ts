@@ -46,6 +46,7 @@ export class Dashboard{
   inverterService : any;
   mpptService : any;
   productionService : any;
+  finalRatio : String = "";
 
   timeFrameList: timeFrame[] = [
         { name: 'Ce jour-ci', code: 'today' },
@@ -83,6 +84,7 @@ export class Dashboard{
       this.data.datasets[0].data.push(data.production);
       console.log(this.data.labels);
     }
+
     for(let data of this.consumptionService.GetAll()){
       this.data.datasets[1].data.push(data.consumption);
       console.log(this.data.labels);
@@ -105,5 +107,16 @@ export class Dashboard{
     console.log(this.inverterService.GetAll());
     console.log(this.mpptService.GetAll());
     console.log(this.productionService.GetAll());
+  }
+
+  getLastProduction(){
+    return this.productionService.GetLast().production;
+  }
+  getLastConsommation(){
+    return this.consumptionService.GetLast().inverter.energyOut;
+  }
+  getFinalProductionRatio(){
+    this.finalRatio = ((this.getLastProduction() - this.getLastConsommation() < 0)? "" : "+") + (this.getLastProduction() - this.getLastConsommation()).toString();
+    return this.finalRatio;
   }
 }

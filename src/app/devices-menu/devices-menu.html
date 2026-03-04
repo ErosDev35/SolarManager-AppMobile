@@ -11,14 +11,14 @@
                         <p-accordion>
                             <p-accordion-panel value="1.1" [style]="{'width':'100%'}">
                             <p-accordion-header><p-card [style]="{'margin-bottom':'5%','border-left': '10px solid #1ba8fa', 'width':'32.5vh', 'margin-left':'-2vh'}">
-                            {{ item.name }} {{ item.production }} {{ item.productionRate }}
-                            <p-progressbar [style]="{'margin-top':'5%'}" [value]="50" />
+                            {{ item.name }} : {{ item.energyOut }} 
+                            <p-progressbar [style]="{'margin-top':'5%'}" [value]="100" />
                         </p-card>
                     </p-accordion-header>
                     <p-accordion-content>
                                 <p-accordion>
                             <p-accordion-panel value="1.1" [style]="{'width':'100%'}">
-                            <p-accordion-header>{{item.battery.name}}</p-accordion-header>
+                            <!--<p-accordion-header>{{item.battery.name}}</p-accordion-header>-->
                             <p-accordion-content>
                                 <p-card></p-card>
                             </p-accordion-content>

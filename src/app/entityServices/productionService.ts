@@ -4,6 +4,7 @@ import { DataService } from "./dataService";
 export class ProductionService{
     dataService : any;
     productions : any[] = [];
+    lastProduction : any;
 
     GetAll() : any{
         this.dataService = new DataService();
@@ -16,5 +17,13 @@ export class ProductionService{
         }
 
         return this.productions;
+    }
+
+    GetLast() : any{
+        this.productions = this.GetAll();
+        this.lastProduction = this.productions[this.productions.length - 1];
+
+        console.log(this.lastProduction);
+        return this.lastProduction;
     }
 }

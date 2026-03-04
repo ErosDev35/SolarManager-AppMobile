@@ -1,10 +1,5 @@
 [
     {
-        "type": "header",
-        "version": "5.1.1deb5ubuntu1",
-        "comment": "Export to JSON plugin for PHPMyAdmin"
-    },
-    {
         "type": "database",
         "name": "SolarManager"
     },
@@ -80,6 +75,26 @@
         "data": [
             {
                 "ID": "1",
+                "DATE": "2025-01-01 08:30:00",
+                "ENERGYOUT": "1.44",
+                "INTENSITYIN": "15",
+                "INTENSITYOUT": "60",
+                "POWERIN": "45",
+                "STATUS": "BULK",
+                "VOLTAGEIN": "89"
+            },
+            {
+                "ID": "2",
+                "DATE": "2025-01-01 08:30:00",
+                "ENERGYOUT": "1.44",
+                "INTENSITYIN": "15",
+                "INTENSITYOUT": "60",
+                "POWERIN": "45",
+                "STATUS": "BULK",
+                "VOLTAGEIN": "89"
+            },
+            {
+                "ID": "3",
                 "DATE": "2025-01-01 08:30:00",
                 "ENERGYOUT": "1.44",
                 "INTENSITYIN": "15",

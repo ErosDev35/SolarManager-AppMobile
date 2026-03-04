@@ -4,6 +4,7 @@ import { Consumption } from "../entity/consumption";
 export class ConsumptionService{
     dataService : any;
     consumptions : any[] = [];
+    lastConsumption : any;
 
     GetAll() : any{
         this.dataService = new DataService();
@@ -16,5 +17,13 @@ export class ConsumptionService{
         }
 
         return this.consumptions;
+    }
+
+    GetLast() : any{
+        this.consumptions = this.GetAll();
+        this.lastConsumption = this.consumptions[this.consumptions.length - 1];
+
+        console.log(this.lastConsumption);
+        return this.lastConsumption;
     }
 }

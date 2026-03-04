@@ -7,9 +7,14 @@ import { FormsModule } from '@angular/forms';
 import { Drawer, DrawerModule } from 'primeng/drawer';
 import { AccordionModule} from 'primeng/accordion';
 import { ScrollerModule } from 'primeng/scroller';
-import { Battery } from './battery';
-import { Mppt } from './mppt';
 import { ProgressBarModule } from 'primeng/progressbar';
+
+import { Battery } from '../entity/battery';
+import { Mppt } from '../entity/mppt';
+
+import { MpptService } from '../entityServices/mpptService';
+import { BatteryService } from '../entityServices/batteryService';
+
 
 @Component({
   selector: 'app-devices-menu',
@@ -19,13 +24,26 @@ import { ProgressBarModule } from 'primeng/progressbar';
 })
 
 export class DevicesMenu {
-
-  mppt: Mppt[] = [
-    new Mppt('Mppt 1', 120, 50, new Battery('Batterie 1', 100, 75)),
-    new Mppt('Mppt 2', 220, 75, new Battery('Batterie 1', 100, 75)),
-    new Mppt('Mppt 3', 120, 50, new Battery('Batterie 1', 100, 75)),
-    new Mppt('Mppt 4', 120, 50, new Battery('Batterie 2', 100, 75))
-  ]
+  batteryService : any;
+  mpptService : any;
+  mppt: Mppt[] = [];
+  battery: Battery[] = [];
 
   anyMpptAvailable : boolean = this.mppt[0] != null;
+
+  ngOnInit() {
+      this.init();
+  }
+
+  init(){
+    this.batteryService = new BatteryService();
+    this.mpptService = new MpptService();
+    this.mppt = this.mpptService.GetAll();
+    this.battery = this.batteryService.GetAll();
+
+    console.log(this.mppt);
+    console.log(this.battery);
+
+    this.anyMpptAvailable = this.mppt[0] != null;
+  }
 }
