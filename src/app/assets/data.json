@@ -84,6 +84,16 @@
                 "VOLTAGEIN": "89"
             },
             {
+                "ID": "1",
+                "DATE": "2025-01-02 09:30:00",
+                "ENERGYOUT": "1.0",
+                "INTENSITYIN": "155",
+                "INTENSITYOUT": "64",
+                "POWERIN": "46",
+                "STATUS": "BULK",
+                "VOLTAGEIN": "85"
+            },
+            {
                 "ID": "2",
                 "DATE": "2025-01-01 08:30:00",
                 "ENERGYOUT": "1.44",
@@ -94,7 +104,7 @@
                 "VOLTAGEIN": "89"
             },
             {
-                "ID": "3",
+                "ID": "4",
                 "DATE": "2025-01-01 08:30:00",
                 "ENERGYOUT": "1.44",
                 "INTENSITYIN": "15",
@@ -113,20 +123,46 @@
             {
                 "ID": "1",
                 "DATE": "08:00:00",
-                "PRODUCTION": "59",
+                "PRODUCTION": "58",
                 "mppt_id": "1"
             },
             {
-                "ID": "3",
+                "ID": "2",
+                "DATE": "08:00:00",
+                "PRODUCTION": "90",
+                "mppt_id": "1"
+            },
+            {
+                "ID": "2",
                 "DATE": "08:30:00",
                 "PRODUCTION": "560",
                 "mppt_id": "1"
             },
             {
-                "ID": "4",
-                "DATE": "09:00:00",
-                "PRODUCTION": "5000",
+                "ID": "3",
+                "DATE": "12:00:00",
+                "PRODUCTION": "500",
                 "mppt_id": "1"
+            }
+            ,
+            {
+                "ID": "4",
+                "DATE": "15:30:00",
+                "PRODUCTION": "500",
+                "mppt_id": "2"
+            }
+            ,
+            {
+                "ID": "6",
+                "DATE": "18:00:00",
+                "PRODUCTION": "250",
+                "mppt_id": "2"
+            },
+            {
+                "ID": "7",
+                "DATE": "18:00:00",
+                "PRODUCTION": "500",
+                "mppt_id": "2"
             }
         ]
     },

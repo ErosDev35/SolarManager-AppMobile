@@ -1,4 +1,4 @@
-export class Inverter{
+                              export class Inverter{
     id : number;
     powerOut : number;
     intensityIn : number;

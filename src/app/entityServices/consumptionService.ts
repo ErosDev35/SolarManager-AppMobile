@@ -5,6 +5,8 @@ export class ConsumptionService{
     dataService : any;
     consumptions : any[] = [];
     lastConsumption : any;
+    consumptionSum : any[] = [];
+    mpptDict : any = new Map<string, number>();
 
     GetAll() : any{
         this.dataService = new DataService();
@@ -23,7 +25,26 @@ export class ConsumptionService{
         this.consumptions = this.GetAll();
         this.lastConsumption = this.consumptions[this.consumptions.length - 1];
 
-        console.log(this.lastConsumption);
+
+        return this.lastConsumption;
+    }
+
+    GetSumOfLatestConsumptions() : number{
+        this.consumptions = this.GetAll();
+
+        this.mpptDict = new Map<string, number>();
+        this.consumptionSum = [];
+        this.lastConsumption = 0;
+
+        this.consumptions.forEach((consumption) =>
+        {
+            if(!this.mpptDict.has(consumption.id)){
+                this.consumptionSum.push();
+                this.mpptDict.set(consumption.id, consumption.inverter.energyOut)
+                this.lastConsumption += consumption.inverter.energyOut;
+            }
+        })
+
         return this.lastConsumption;
     }
 }

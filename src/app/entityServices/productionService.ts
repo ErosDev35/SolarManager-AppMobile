@@ -5,6 +5,7 @@ export class ProductionService{
     dataService : any;
     productions : any[] = [];
     lastProduction : any;
+    mpptDict = new Map<string, number>();
 
     GetAll() : any{
         this.dataService = new DataService();
@@ -23,7 +24,24 @@ export class ProductionService{
         this.productions = this.GetAll();
         this.lastProduction = this.productions[this.productions.length - 1];
 
-        console.log(this.lastProduction);
+        return this.lastProduction;
+    }
+
+    GetSumOfLatestProductions() : any{
+        this.productions = this.GetAll();
+
+        this.mpptDict = new Map<string, number>();
+        this.lastProduction = 0;
+        
+        this.productions.forEach((production) =>
+        {
+            if(!this.mpptDict.has(production.mppt_id)){
+                this.mpptDict.set(production.id, this.dataService.getById("production", production.id)[this.dataService.getById("production", production.id).length - 1])
+                this.lastProduction += Number.parseFloat(production.production);
+            }
+        })
+        console.log(this.mpptDict);
+
         return this.lastProduction;
     }
 }

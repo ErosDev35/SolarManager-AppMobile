@@ -110,13 +110,13 @@ export class Dashboard{
   }
 
   getLastProduction(){
-    return this.productionService.GetLast().production;
+    return this.productionService.GetSumOfLatestProductions();
   }
   getLastConsommation(){
-    return this.consumptionService.GetLast().inverter.energyOut;
+    return this.consumptionService.GetSumOfLatestConsumptions();
   }
   getFinalProductionRatio(){
-    this.finalRatio = ((this.getLastProduction() - this.getLastConsommation() < 0)? "" : "+") + (this.getLastProduction() - this.getLastConsommation()).toString();
+    this.finalRatio = ((this.productionService.GetSumOfLatestProductions() - 50 < 0)? "" : "+") + (this.productionService.GetSumOfLatestProductions() - 50);
     return this.finalRatio;
   }
 }
