@@ -4,7 +4,7 @@
     <p-card [style]="{'height':'100%', padding: '0', 'background-color': '#FFFFFF', 'margin-bottom': '2.5vh', 'border-radius':'0% 0% 5% 5%'}">
         <tr>
             <td>
-                <i class="pi pi-arrow-circle-down" style="color: rgb(0, 161, 0); font-size: 5vh; margin-left: 4vh;"></i> 
+                <i class="pi pi-home" style="color: rgb(112, 112, 112); font-size: 5vh; margin-left: 4vh;"></i> 
                 <p style="margin-right: 28.5vh; margin-bottom: 0">??.?°C, Evreux</p>
             </td>
             <td>
@@ -20,19 +20,19 @@
         </div>
     </p-card>
     
-    <p-card [style]="{'height':'100%', padding: '0', 'background-color': '#FFFFFF', 'margin-bottom': '2rem', 'margin-top': '2vh', 'width':'95%', 'margin-left':'0.6vh'}">
+    <p-card [style]="{'height':'100%', padding: '0', 'background-color': '#FFFFFF', 'margin-bottom': '2rem', 'margin-top': '2vh', 'width':'95%', 'margin-left':'2.5%'}">
         <div style="display: flex; align-items: center; justify-content: center; padding: 0; width: 100%;">
             <tr style="width: 100%;">
                 <td style="width: 50%; text-align: center;">
-                    <i class="pi pi-arrow-circle-down" style="color: rgb(0, 161, 0);"></i>
+                    <i class="pi pi-arrow-circle-up" style="color: rgb(0, 161, 0);"></i>
                     <p> {{getLastProduction()}} Kwh </p>
                 </td>
                 <td style="width: 0%; text-align: center;">
-                    <i class="pi pi-times" style="color: rgb(0, 161, 0);"></i>
+                    <i class={{getRatioIcon()}} style={{getRationColor()}}></i>
                     <small> {{getFinalProductionRatio()}} Kwh </small>
                 </td>
                 <td style="width: 50%; text-align: center;">
-                    <i class="pi pi-arrow-circle-up" style="color: rgb(255, 0, 0)"></i>
+                    <i class="pi pi-arrow-circle-down" style="color: rgb(255, 0, 0)"></i>
                     <p> {{getLastConsommation()}} Kwh </p>
                 </td>
             </tr>

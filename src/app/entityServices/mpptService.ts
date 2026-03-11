@@ -6,6 +6,8 @@ export class MpptService{
     dataService : any;
     mppt : any;
     mppts : any[] = [];
+    mpptsToReturn : any[] = [];
+    mpptId : String = "";
     data: any = null;
 
     GetAll() : any{
@@ -28,5 +30,16 @@ export class MpptService{
         const dataArray = Array.isArray(this.data) ? this.data.find((t: any) => t?.ID === mppt.id) : undefined;
 
         return (dataArray !== undefined)? dataArray.NAME : undefined;
+    }
+
+    GetById(id : String) : any{
+        this.mppts = this.GetAll();
+        this.mppts.forEach((mppt) => {
+            this.mpptId = mppt.id;
+            if(mppt.id === id){
+                this.mpptsToReturn.push(mppt);
+            }
+        })
+        return this.mpptsToReturn;
     }
 }

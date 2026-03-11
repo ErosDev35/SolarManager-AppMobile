@@ -1,10 +1,11 @@
 import { DataService } from "./dataService";
 import { Agent } from "../entity/agent";
-import { User } from "../entity/user";
 
 export class UserService{
     dataService : any;
     users : any[] = [];
+    username : String = "";
+    user : any = null;
 
     GetAll() : any{
         this.dataService = new DataService();
@@ -17,5 +18,18 @@ export class UserService{
         }
 
         return this.users;
+    }
+
+    GetByLogin(login : String) : any{
+        this.users = this.GetAll();
+        this.user = null;
+        this.users.forEach((user) => {
+            this.username = user.login;
+
+            if(this.user === null && this.username === login){
+                this.user = user;
+            }
+        })
+        return this.user;
     }
 }

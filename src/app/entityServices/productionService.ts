@@ -15,6 +15,7 @@ export class ProductionService{
 
         for(let data of userArray.data){
             this.productions.push(new Production(data.ID,data.DATE,data.MPPT_ID,data.PRODUCTION));
+            console.log()
         }
 
         return this.productions;
@@ -36,11 +37,10 @@ export class ProductionService{
         this.productions.forEach((production) =>
         {
             if(!this.mpptDict.has(production.mppt_id)){
-                this.mpptDict.set(production.id, this.dataService.getById("production", production.id)[this.dataService.getById("production", production.id).length - 1])
+                this.mpptDict.set(production.mppt_id, this.dataService.getById("production", production.id)[this.dataService.getById("production", production.id).length - 1])
                 this.lastProduction += Number.parseFloat(production.production);
             }
         })
-        console.log(this.mpptDict);
 
         return this.lastProduction;
     }

@@ -1,16 +1,19 @@
 import { Mppt } from "./mppt";
+import { MpptService } from "../entityServices/mpptService";
 
 export class Production{
     id : number;
     date : Date;
     mppt : Mppt;
     production : number;
+    mpptService : any;
 
-    constructor(id : number,date : Date,mppt : Mppt,production : number)
+    constructor(id : number,date : Date,mpptId : String,production : number)
     {
+        this.mpptService = new MpptService();
         this.id = id;
         this.date = date;
-        this.mppt = mppt;
+        this.mppt = this.mpptService.GetById(mpptId);
         this.production = production;
     }
 }

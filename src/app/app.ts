@@ -1,6 +1,5 @@
-import { Component} from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
+import { Component, inject} from '@angular/core';
+import { AppAllPrimeng } from './assets/appAllPrimeng.module';
 import { Login } from "./login/login";
 import { Dashboard } from "./dashboard/dashboard";
 import { MenuHeader } from './menu-header/menu-header';
@@ -9,7 +8,7 @@ import { IntroCutscene } from './login/intro-cutscene/intro-cutscene';
 
 @Component({
   selector: 'app-root',
-  imports: [ButtonModule, CardModule, Login, Dashboard, MenuHeader, MenuBottom, IntroCutscene],
+  imports: [AppAllPrimeng, Login, Dashboard, MenuHeader, MenuBottom, IntroCutscene],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

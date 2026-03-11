@@ -15,17 +15,14 @@ export class ConsumptionService{
         this.consumptions = [];
 
         for(let data of userArray.data){
-            this.consumptions.push(new Consumption(data.ID, data.inverter_id, data.provider_id, data.DATE));
+            this.consumptions.push(new Consumption(data.ID, data.inverter_id, data.provider_id, data.DATE, data.CONSUMPTION));
         }
-
         return this.consumptions;
     }
 
     GetLast() : any{
         this.consumptions = this.GetAll();
         this.lastConsumption = this.consumptions[this.consumptions.length - 1];
-
-
         return this.lastConsumption;
     }
 
@@ -38,10 +35,9 @@ export class ConsumptionService{
 
         this.consumptions.forEach((consumption) =>
         {
-            if(!this.mpptDict.has(consumption.id)){
-                this.consumptionSum.push();
-                this.mpptDict.set(consumption.id, consumption.inverter.energyOut)
-                this.lastConsumption += consumption.inverter.energyOut;
+            if(!this.mpptDict.has(consumption.inverter_id)){
+                this.mpptDict.set(consumption.inverter_id, consumption.consumption)
+                this.lastConsumption += Number.parseFloat(consumption.consumption);
             }
         })
 

@@ -26,30 +26,54 @@
         "data": [
             {
                 "ID": "1",
-                "CONSUMPTION": "6000",
+                "CONSUMPTION": "400",
                 "DATE": "2025-01-01 08:30:00",
                 "inverter_id": "1",
                 "provider_id": "1"
             },
             {
                 "ID": "2",
-                "CONSUMPTION": "6200",
+                "CONSUMPTION": "520",
                 "DATE": "2025-01-01 09:30:00",
                 "inverter_id": "1",
                 "provider_id": "1"
             },
             {
                 "ID": "3",
-                "CONSUMPTION": "5800",
+                "CONSUMPTION": "300",
                 "DATE": "2025-12-01 10:30:00",
                 "inverter_id": "1",
                 "provider_id": "1"
             },
             {
                 "ID": "4",
-                "CONSUMPTION": "6100",
-                "DATE": "2026-01-01 11:30:00",
+                "CONSUMPTION": "400",
+                "DATE": "2026-01-01 15:30:00",
                 "inverter_id": "1",
+                "provider_id": "1"
+            }
+            ,
+            {
+                "ID": "5",
+                "CONSUMPTION": "500",
+                "DATE": "2026-01-01 18:00:00",
+                "inverter_id": "1",
+                "provider_id": "1"
+            }
+            ,
+            {
+                "ID": "6",
+                "CONSUMPTION": "400",
+                "DATE": "2026-01-01 18:00:00",
+                "inverter_id": "1",
+                "provider_id": "1"
+            }
+            ,
+            {
+                "ID": "7",
+                "CONSUMPTION": "400",
+                "DATE": "2026-01-01 18:00:00",
+                "inverter_id": "2",
                 "provider_id": "1"
             }
         ]
@@ -64,7 +88,7 @@
                 "DATE": "2025-01-01 08:30:00",
                 "ENERGYOUT": "230",
                 "INTENSITYIN": "24",
-                "POWEROUT": "6000"
+                "POWEROUT": "500"
             }
         ]
     },

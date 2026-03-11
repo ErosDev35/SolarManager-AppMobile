@@ -29,7 +29,6 @@ export class DataService {
         switch(deviceType){
             case "Mppt":
                 const mpptArray = this.getById("mppt", deviceId);
-                Mppt mppt = new Mppt(mpptArray.ID,mpptArray.INTENSITYIN,mpptArray.INTENSITYOUT,mpptArray.VOLTAGEIN,mpptArray.STATUS,mpptArray.POWERIN,mpptArray.ENERGYOUT,);
             break;
             case "Inverter":
                 this.getById("inverter", deviceId);
