@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AppAllPrimeng } from '../assets/appAllPrimeng.module';
 import { HttpClient } from '@angular/common/http';
+import moment from 'moment';
 
 import { Mppt } from '../entity/mppt';
 import { User } from '../entity/user';
@@ -40,7 +41,7 @@ export class Dashboard{
   mpptService : any;
   productionService : any;
   finalRatio : String = "";
-  cityName: string = 'Pune';
+  cityName: string = 'Évreux';
   weatherData: any;
   iconUrl: string = '';
   currentDate: string = '';
@@ -70,6 +71,11 @@ export class Dashboard{
                 console.error('Error fetching weather data:', error);
             }
         );
+    }
+    getTempOfLocation(){
+      setTimeout(() => {
+        return this.weatherData.main.temp;
+      }, 1000);
     }
 
   timeFrameList: timeFrame[] = [
@@ -110,8 +116,6 @@ export class Dashboard{
     this.inverterService = new InverterService();
     this.mpptService = new MpptService();
     this.productionService = new ProductionService();
-
-    console.log(this.productionService.GetAll());
   }
 
   getLastProduction(){
@@ -132,14 +136,12 @@ export class Dashboard{
   getRatioIcon() : String{
     this.finalRatio = (this.getRatio())? 
     "pi pi-arrow-circle-down" : "pi pi-arrow-circle-up"
-    console.log(this.finalRatio);
     return this.finalRatio;
   }
 
   getRationColor() : String{
     this.finalRatio = (this.getRatio())? 
     "color: rgb(255, 0, 0)" : "color: rgb(0, 161, 0);"
-    console.log(this.finalRatio);
     return this.finalRatio;
   }
 }
