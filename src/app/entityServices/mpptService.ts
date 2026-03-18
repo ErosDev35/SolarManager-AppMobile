@@ -8,6 +8,7 @@ export class MpptService{
     mppts : any[] = [];
     mpptsToReturn : any[] = [];
     mpptId : String = "";
+    mpptReference : String = "";
     data: any = null;
 
     GetAll() : any{
@@ -17,11 +18,10 @@ export class MpptService{
         this.mppts = [];
 
         for(let data of userArray.data){
-            this.mppt = new Mppt(data.ID, data.INTENSITYIN, data.INTENSITYOUT, data.VOLTAGEIN, data.STATUS, data.POWERIN, data.ENERGYOUT);
+            this.mppt = new Mppt(data.ID, data.INTENSITYIN, data.INTENSITYOUT, data.VOLTAGEIN, data.STATUS, data.POWERIN, data.ENERGYOUT,data.REFERENCE);
             this.mppt.name = (this.getMpptName(this.mppt) !== undefined)? this.getMpptName(this.mppt) : this.mppt.id;
             this.mppts.push(this.mppt);
         }
-
         return this.mppts;
     }
 
@@ -32,11 +32,11 @@ export class MpptService{
         return (dataArray !== undefined)? dataArray.NAME : undefined;
     }
 
-    GetById(id : String) : any{
+    GetByReference(reference : String) : any{
         this.mppts = this.GetAll();
         this.mppts.forEach((mppt) => {
-            this.mpptId = mppt.id;
-            if(mppt.id === id){
+            this.mpptReference = mppt.reference;
+            if(mppt.reference === reference){
                 this.mpptsToReturn.push(mppt);
             }
         })

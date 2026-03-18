@@ -14,5 +14,8 @@ export class MenuBottom {
   openMenu() : void {
     this.menuDialog = !this.menuDialog;
   }
-
+  returnToDashboard(){
+    window.sessionStorage.setItem('displayDevice', 'false');
+    window.location.reload();
+  }
 }

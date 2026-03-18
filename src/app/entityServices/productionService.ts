@@ -10,38 +10,44 @@ export class ProductionService{
     GetAll() : any{
         this.dataService = new DataService();
         const userArray = this.dataService.getEntityData("production");
-
         this.productions = [];
-
         for(let data of userArray.data){
-            this.productions.push(new Production(data.ID,data.DATE,data.MPPT_ID,data.PRODUCTION));
+            this.productions.push(new Production(data.ID,data.DATE,data.mppt_reference,data.PRODUCTION));
             console.log()
         }
-
         return this.productions;
     }
 
     GetLast() : any{
         this.productions = this.GetAll();
         this.lastProduction = this.productions[this.productions.length - 1];
-
         return this.lastProduction;
+    }
+    
+    GetByMpptReference(reference : String) : any{
+        this.productions = this.GetAll();
+        this.productions.forEach((production) =>
+        {
+            if(!production.mppt[0].reference.toString().includes(reference)){
+                this.productions.splice(this.productions.indexOf(production,1))
+            }
+        })
+        return this.productions;
     }
 
     GetSumOfLatestProductions() : any{
         this.productions = this.GetAll();
-
         this.mpptDict = new Map<string, number>();
         this.lastProduction = 0;
         
         this.productions.forEach((production) =>
         {
-            if(!this.mpptDict.has(production.mppt_id)){
-                this.mpptDict.set(production.mppt_id, this.dataService.getById("production", production.id)[this.dataService.getById("production", production.id).length - 1])
+            if(!this.mpptDict.has(production.mppt[0].reference)){
+                this.mpptDict.set(production.mppt[0].reference, this.dataService.getById("production", production.mppt[0].reference)[this.dataService.getById("production", production.mppt[0].reference).length - 1])
                 this.lastProduction += Number.parseFloat(production.production);
             }
-        })
-
+        });
         return this.lastProduction;
     }
+
 }

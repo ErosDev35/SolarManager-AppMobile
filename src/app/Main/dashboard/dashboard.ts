@@ -1,23 +1,25 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { AppAllPrimeng } from '../assets/appAllPrimeng.module';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AppAllPrimeng } from '../../assets/appAllPrimeng.module';
 import { HttpClient } from '@angular/common/http';
+import { formatDate } from '@angular/common';
 import moment from 'moment';
 
-import { Mppt } from '../entity/mppt';
-import { User } from '../entity/user';
-import { Battery } from '../entity/battery';
-import { Consumption } from '../entity/consumption';
-import { EnergyProvider } from '../entity/energyProvider';
-import { Inverter } from '../entity/inverter';
-import { Production } from '../entity/production';
+import { Mppt } from '../../entity/mppt';
+import { User } from '../../entity/user';
+import { Battery } from '../../entity/battery';
+import { Consumption } from '../../entity/consumption';
+import { EnergyProvider } from '../../entity/energyProvider';
+import { Inverter } from '../../entity/inverter';
+import { Production } from '../../entity/production';
 
-import { UserService } from '../entityServices/userService';
-import { BatteryService } from '../entityServices/batteryService';
-import { ConsumptionService } from '../entityServices/consumptionService';
-import { EnergyProviderService } from '../entityServices/energyProviderService';
-import { InverterService } from '../entityServices/inverterService';
-import { MpptService } from '../entityServices/mpptService';
-import { ProductionService } from '../entityServices/productionService';
+import { UserService } from '../../entityServices/userService';
+import { BatteryService } from '../../entityServices/batteryService';
+import { ConsumptionService } from '../../entityServices/consumptionService';
+import { EnergyProviderService } from '../../entityServices/energyProviderService';
+import { InverterService } from '../../entityServices/inverterService';
+import { MpptService } from '../../entityServices/mpptService';
+import { ProductionService } from '../../entityServices/productionService';
 
 interface timeFrame {
     name: string;
@@ -26,10 +28,11 @@ interface timeFrame {
 
 @Component({
   selector: 'app-dashboard',
-  imports: [AppAllPrimeng],
+  imports: [CommonModule, AppAllPrimeng],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
+
 export class Dashboard{
   options: any;
   data : any;
@@ -43,39 +46,36 @@ export class Dashboard{
   finalRatio : String = "";
   cityName: string = 'Évreux';
   weatherData: any;
-  iconUrl: string = '';
   currentDate: string = '';
-  loading: boolean = false;
   error: string = '';
+  currentTemp: number | null = null;
+  currentCloudiness: number | null = null;
+
 
     private url = 'https://api.openweathermap.org/data/2.5/weather';
     private apiKey = 'f00c38e0279b7bc85480c3fe775d518c';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
 
     getWeather(): void {
-        this.loading = true;
         this.error = '';
         const fullUrl = `${this.url}?q=${this.cityName}&appid=${this.apiKey}&units=metric`;
+        
         this.http.get(fullUrl).subscribe(
-            (data: any) => {
-                this.weatherData = data;
-                this.iconUrl = 'https://openweathermap.org/img/w/$%7Bdata.weather%5B0%5D.icon%7D.png%60';
-                this.currentDate = moment().format('MMMM Do YYYY, h:mm:ss a');
-                document.getElementById('weather-info')?.style.setProperty('display', 'block');
-                this.loading = false;
-            },
-            (error) => {
-                this.error = 'City not found. Please try again.';
-                this.loading = false;
-                console.error('Error fetching weather data:', error);
-            }
-        );
-    }
-    getTempOfLocation(){
-      setTimeout(() => {
-        return this.weatherData.main.temp;
-      }, 1000);
+          (data: any) => {
+            this.weatherData = data;
+            this.currentDate = moment().format('MMMM Do YYYY, h:mm:ss a');
+            document.getElementById('weather-info')?.style.setProperty('display', 'block');
+            this.currentTemp = this.weatherData?.main?.temp ?? null;
+            this.currentCloudiness = this.weatherData?.clouds?.all ?? null;
+            this.cd.detectChanges();
+            console.log(this.weatherData?.clouds?.all);
+          },
+          (error) => {
+            this.error = 'City not found. Please try again.';
+            console.error('Error fetching weather data:', error);
+          }
+      );
     }
 
   timeFrameList: timeFrame[] = [
@@ -99,7 +99,7 @@ export class Dashboard{
         {label: 'Consommation', data: [], fill: true, tension: 0.4}]
     }
     for(let data of this.productionService.GetAll()){
-      this.data.labels.push(data.date);
+      this.data.labels.push(formatDate(data.date, "hh:mm:ss", 'en-US'));
       this.data.datasets[0].data.push(data.production);
     }
 
@@ -135,7 +135,7 @@ export class Dashboard{
 
   getRatioIcon() : String{
     this.finalRatio = (this.getRatio())? 
-    "pi pi-arrow-circle-down" : "pi pi-arrow-circle-up"
+    "pi pi-arrow-down" : "pi pi-arrow-up"
     return this.finalRatio;
   }
 

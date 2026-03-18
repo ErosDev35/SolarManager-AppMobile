@@ -4,12 +4,30 @@
     <p-card [style]="{'height':'100%', padding: '0', 'background-color': '#FFFFFF', 'margin-bottom': '2.5vh', 'border-radius':'0% 0% 5% 5%'}">
         <tr>
             <td>
-                <i class="pi pi-home" style="color: rgb(112, 112, 112); font-size: 5vh; margin-left: 4vh;"></i> 
-                <p style="margin-right: 28.5vh; margin-bottom: 0">{{getTempOfLocation()}}°C, {{cityName}}</p>
+                <div style="display: flex; padding: 0; margin-top: 0.75vh;">
+                    <i class="pi pi-map-marker" style="color: rgb(112, 112, 112); font-size: 4.5vh; margin-right: 1rem;"></i>
+                    <div>
+                        <p style="margin: 0;">
+                            {{ currentTemp !== null ? (currentTemp + '°C') : 'N/A' }}, {{ cityName }}
+                        </p>
+                        <p style="margin: 0; font-size: 0.9rem auto; color: rgb(120, 120, 120);">
+                            {{ error || weatherData?.weather?.[0]?.description || 'Données météo indisponibles' }}
+                        </p>
+                    </div>
+                </div>
             </td>
             <td>
-                <i class="pi pi-sun" style="color: rgb(255, 230, 0); font-size: 5vh"></i> 
-                <p style="margin-bottom: 0;">??.?%</p>
+                <div style="display: flex; padding: 0; padding-left: 60%;">
+                    <i class="pi pi-cloud" style="color: rgb(187, 187, 187); font-size: 4.5vh; margin-right: 1rem;"></i>
+                    <div>
+                        <p style="margin: 0;">
+                            {{ currentCloudiness !== null ? (currentCloudiness + '%') : 'N/A' }}
+                        </p>
+                        <p style="margin: 0; font-size: 0.9rem auto; color: rgb(120, 120, 120);">
+                            nuages
+                        </p>
+                    </div>
+                </div>
             </td>
         </tr>
     </p-card>
@@ -28,7 +46,7 @@
                     <p> {{getLastProduction()}} Kwh </p>
                 </td>
                 <td style="width: 0%; text-align: center;">
-                    <i class={{getRatioIcon()}} style={{getRationColor()}}></i>
+                    <i [ngClass]="getRatioIcon()" [ngStyle]="{ color: getRatio() ? 'rgb(255, 0, 0)' : 'rgb(0, 161, 0)' }"></i>
                     <small> {{getFinalProductionRatio()}} Kwh </small>
                 </td>
                 <td style="width: 50%; text-align: center;">

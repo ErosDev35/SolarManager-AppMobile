@@ -25,6 +25,8 @@ export class DevicesMenu {
 
   ngOnInit() {
       this.init();
+          window.sessionStorage.setItem('displayDevice', 'false');
+
   }
 
   init(){
@@ -34,5 +36,11 @@ export class DevicesMenu {
     this.battery = this.batteryService.GetAll();
 
     this.anyMpptAvailable = this.mppt[0] != null;
+  }
+
+  openDeviceDisplay(selectedMppt : Mppt){
+    window.sessionStorage.setItem('displayDevice', String(window.sessionStorage.getItem('displayDevice') === 'false'));
+    window.sessionStorage.setItem('selectedMpptReference', String(selectedMppt.reference));
+    window.location.reload();
   }
 }

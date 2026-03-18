@@ -6,6 +6,11 @@
 }
 @if (logged) {
   <app-menu-header></app-menu-header>
-  <app-dashboard></app-dashboard>
+  @if(displayDevice){
+    <app-select-device></app-select-device>
+  }@else {
+    <app-dashboard></app-dashboard>
+  }
+  
   <app-menu-bottom></app-menu-bottom>
 }

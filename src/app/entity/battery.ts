@@ -7,9 +7,11 @@ export class Battery
     nbCycle : number;
     intensity : number;
     date : Date;
+    voltage : number;
 
     constructor(id : number, capacity : number, name : String
-        , stateOfHealth : number, nbCycle : number, intensity : number, date : Date)
+        , stateOfHealth : number, nbCycle : number, intensity : number, 
+        date : Date, voltage : number)
     {    
         this.id = id;
         this.capacity = capacity;
@@ -18,5 +20,6 @@ export class Battery
         this.nbCycle = nbCycle;
         this.intensity = intensity;
         this.date = date;
+        this.voltage = voltage;
     }
 }

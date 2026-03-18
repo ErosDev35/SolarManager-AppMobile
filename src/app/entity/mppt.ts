@@ -9,8 +9,9 @@ export class Mppt{
     status : Status_enum;
     powerIn : number;
     energyOut : number;
+    reference : String;
 
-    constructor(id : number,intensityIn : number,intensityOut : number,voltageIn : number,status : Status_enum,powerIn : number,energyOut : number, name : String = ""){
+    constructor(id : number,intensityIn : number,intensityOut : number,voltageIn : number,status : Status_enum,powerIn : number,energyOut : number, reference : String = "",name : String = ""){
         this.id = id;
         this.intensityIn = intensityIn;
         this.intensityOut = intensityOut;
@@ -19,5 +20,6 @@ export class Mppt{
         this.powerIn = powerIn;
         this.energyOut = energyOut;
         this.name = name;
+        this.reference = reference;
     }
 }

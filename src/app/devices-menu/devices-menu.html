@@ -4,32 +4,17 @@
             <p-accordion-header [style]="{'box-shadow':'0px 0px 10px rgba(0, 0, 0, 0.25)'}">Vos Panneaux Solaires</p-accordion-header>
             <p-accordion-content>
                 @if(!anyMpptAvailable){
-                    <p>Vous n'avez pas encore ajouté de panneau solaire à votre compte.</p>
+                    <p>Vous n'avez pas encore ajouté de mppt à votre compte.</p>
                 }
                 <p-scroller styleClass="border-1 surface-border" scrollHeight="70vh" [items]="mppt" [itemSize]="50" [style]="{'margin-top':'5%'}">
                     <ng-template pTemplate="item" let-item let-options="options">
-                        <p-accordion>
-                            <p-accordion-panel value="1.1" [style]="{'width':'100%'}">
-                            <p-accordion-header><p-card [style]="{'margin-bottom':'5%','border-left': '10px solid #1ba8fa', 'width':'32.5vh', 'margin-left':'-2vh'}">
+                        <p-card [style]="{'margin-bottom':'5%','border-left': '10px solid #1ba8fa', 'width':'100%', 'margin-left':'-2vh'}" (click)="openDeviceDisplay(item)">
                             {{ item.name }} : {{ item.energyOut }} 
                             <p-progressbar [style]="{'margin-top':'5%'}" [value]="100" />
                         </p-card>
-                    </p-accordion-header>
-                    <p-accordion-content>
-                                <p-accordion>
-                            <p-accordion-panel value="1.1" [style]="{'width':'100%'}">
-                            <!--<p-accordion-header>{{item.battery.name}}</p-accordion-header>-->
-                            <p-accordion-content>
-                                <p-card></p-card>
-                            </p-accordion-content>
-                            </p-accordion-panel>
-                            </p-accordion>
-                    </p-accordion-content>
-                    </p-accordion-panel>
-                    </p-accordion>
                     </ng-template>
                 </p-scroller>
             </p-accordion-content>
-        </p-accordion-panel>
+            </p-accordion-panel>
     </p-accordion>
 </div>

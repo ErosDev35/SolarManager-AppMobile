@@ -1,4 +1,5 @@
 import { NgModule} from '@angular/core';
+import { formatDate } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';

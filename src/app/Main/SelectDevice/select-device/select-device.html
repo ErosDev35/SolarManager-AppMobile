@@ -1,0 +1,28 @@
+<div>
+    <p-card [style]="{'height':'100%', padding: '0', 'background-color': '#FFFFFF', 'border-left': '10px solid #1ba8fa', 'margin-bottom': '3vh'}">
+    </p-card>
+    <p-card [style]="{'height':'100vh'}">
+        <h3 style="width: 100%; text-align: center; margin-top: -1%;">{{mpptSelected.name}} ({{mpptSelected.reference}})</h3>
+        <p style="width: 100%; text-align: center;">"{{mpptSelected.name}}" représente {{getMpptProductionRate()}}% de votre production ! </p>
+        <p-chart type="pie" [data]="mpptData" [options]="options" [style]="{'align-items':'center'}"></p-chart>
+        <p-card [style]="{'box-shadow':'0px -10px 5px rgba(0, 0, 0, 0.1)', 'margin-top':'5%'}">
+            <p-accordion value="0" >
+                <p-accordion-panel value="0">
+                    <p-accordion-header [style]="{'margin-top':'-5%'}">Statistiques de "{{mpptSelected.name}}"</p-accordion-header>
+                    <p-accordion-content>
+                        <table>
+                            <tr>
+                                <td>
+                                    Intensité Entrante : 
+                                </td>
+                                <td>
+                                    Intensité Sortante : 
+                                </td>
+                            </tr>
+                        </table>
+                    </p-accordion-content>
+                </p-accordion-panel>
+            </p-accordion>
+        </p-card>
+    </p-card>
+</div>

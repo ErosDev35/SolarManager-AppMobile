@@ -8,12 +8,12 @@ export class Production{
     production : number;
     mpptService : any;
 
-    constructor(id : number,date : Date,mpptId : String,production : number)
+    constructor(id : number,date : Date, mpptReference : String,production : number)
     {
         this.mpptService = new MpptService();
         this.id = id;
         this.date = date;
-        this.mppt = this.mpptService.GetById(mpptId);
+        this.mppt = this.mpptService.GetByReference(mpptReference);
         this.production = production;
     }
 }
