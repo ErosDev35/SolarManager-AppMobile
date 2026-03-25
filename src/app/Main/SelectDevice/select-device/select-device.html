@@ -3,7 +3,7 @@
     </p-card>
     <p-card [style]="{'height':'150vh'}">
         <h3 style="width: 100%; text-align: center; margin-top: -1%;">{{mpptSelected.name}} ({{mpptSelected.reference}})</h3>
-        <p style="width: 100%; text-align: center;">"{{mpptSelected.name}}" représente <b>{{getMpptProductionRate()}}%</b> de votre production totale ! </p>
+        <p style="width: 100%; text-align: center;">"{{mpptSelected.name}}" représente <b>{{getMpptProductionRate() * 100}}%</b> de votre production totale ! </p>
         <p-chart type="pie" [data]="mpptData" [options]="options" [style]="{'align-items':'center'}"></p-chart>
         <p-card [style]="{'box-shadow':'0px -10px 5px rgba(0, 0, 0, 0.1)', 'margin-top':'5%', 'margin-bottom': '20vh'}">
             <p-accordion value="0" >
@@ -43,10 +43,21 @@
                 <p-accordion-panel value="0">
                     <p-accordion-header [style]="{'margin-top':'-5%'}">Statistiques sous forme de graphique</p-accordion-header>
                     <p-accordion-content>
-                        <p></p>
-                        <p-chart>
-
-                        </p-chart>
+                        <p-chart type="line" [data]="data" [options]="options" class="h-[30rem]"/>
+                        <tr>
+                            <td>
+                                <p-button>Jour</p-button>
+                            </td>
+                            <td>
+                                <p-button>Semaine</p-button>
+                            </td>
+                            <td>
+                                <p-button>Mois</p-button>
+                            </td>
+                            <td>
+                                <p-button>Tout</p-button>
+                            </td>
+                        </tr>
                     </p-accordion-content>
                 </p-accordion-panel>
             </p-accordion>
