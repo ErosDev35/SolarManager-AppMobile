@@ -12,7 +12,7 @@ export class BatteryService{
         this.batteries = [];
 
         for(let data of userArray.data){
-            this.batteries.push(new Battery(data.ID, data.CAPACITY, data.NAME, data.STATEOFHEALTH, data.NBCYCLE, data.INTENSITY, data.DATE, data.VOLTAGE));
+            this.batteries.push(new Battery(data.ID, data.NAME, data.STATEOFHEALTH, data.INTENSITY, data.DATE, data.VOLTAGE));
         }
 
         return this.batteries;

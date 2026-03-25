@@ -10,7 +10,11 @@
                     <ng-template pTemplate="item" let-item let-options="options">
                         <p-card [style]="{'margin-bottom':'5%','border-left': '10px solid #1ba8fa', 'width':'100%', 'margin-left':'-2vh'}" (click)="openDeviceDisplay(item)">
                             {{ item.name }} : {{ item.energyOut }} 
-                            <p-progressbar [style]="{'margin-top':'5%'}" [value]="100" />
+                            <p-progressbar [style]="{'margin-top':'5%'}" [value]="100" [showValue]="false" [color]="">
+                                <ng-template #content let-value>
+                                    <span>{{item.status}}</span>
+                                </ng-template>
+                            </p-progressbar>
                         </p-card>
                     </ng-template>
                 </p-scroller>

@@ -6,6 +6,7 @@ import { Mppt } from '../entity/mppt';
 
 import { MpptService } from '../entityServices/mpptService';
 import { BatteryService } from '../entityServices/batteryService';
+import { Status_enum } from '../entity/status_enum';
 
 
 @Component({
@@ -42,5 +43,13 @@ export class DevicesMenu {
     window.sessionStorage.setItem('displayDevice', String(window.sessionStorage.getItem('displayDevice') === 'false'));
     window.sessionStorage.setItem('selectedMpptReference', String(selectedMppt.reference));
     window.location.reload();
+  }
+
+  getColorFromStatus(status : Status_enum){
+    switch(status){
+      case Status_enum.OFF:
+        
+        break;
+    }
   }
 }
