@@ -25,22 +25,4 @@ export class ConsumptionService{
         this.lastConsumption = this.consumptions[this.consumptions.length - 1];
         return this.lastConsumption;
     }
-
-    GetSumOfLatestConsumptions() : number{
-        this.consumptions = this.GetAll();
-
-        this.mpptDict = new Map<string, number>();
-        this.consumptionSum = [];
-        this.lastConsumption = 0;
-
-        this.consumptions.forEach((consumption) =>
-        {
-            if(!this.mpptDict.has(consumption.inverter_id)){
-                this.mpptDict.set(consumption.inverter_id, consumption.consumption)
-                this.lastConsumption += Number.parseFloat(consumption.consumption);
-            }
-        })
-
-        return this.lastConsumption;
-    }
 }

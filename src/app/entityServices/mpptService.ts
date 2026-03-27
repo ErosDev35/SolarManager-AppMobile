@@ -10,6 +10,7 @@ export class MpptService{
     mpptId : String = "";
     mpptReference : String = "";
     data: any = null;
+    powerIn : number = 0;
 
     GetAll() : any{
         this.dataService = new DataService();
@@ -18,7 +19,7 @@ export class MpptService{
         this.mppts = [];
 
         for(let data of userArray.data){
-            this.mppt = new Mppt(data.ID, data.INTENSITYIN, data.INTENSITYOUT, data.VOLTAGEIN, data.STATUS, data.POWERIN, data.ENERGYOUT,data.REFERENCE);
+            this.mppt = new Mppt(data.ID, data.INTENSITYIN, data.INTENSITYOUT, data.VOLTAGEIN, data.STATUS, data.POWERIN, data.ENERGYOUT,data.REFERENCE, data.DATE);
             this.mppt.name = (this.getMpptName(this.mppt) !== undefined)? this.getMpptName(this.mppt) : this.mppt.id;
             this.mppts.push(this.mppt);
         }
@@ -41,5 +42,14 @@ export class MpptService{
             }
         })
         return this.mpptsToReturn;
+    }
+
+    GetSumOfAllPower() : number{
+        this.powerIn = 0;
+        this.mppts = this.GetAll();
+        this.mppts.forEach((mppt)=>{
+            this.powerIn += mppt.powerIn;
+        })
+        return 0;
     }
 }

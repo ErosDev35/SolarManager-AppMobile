@@ -1,18 +1,14 @@
-import { EnergyProvider } from "./energyProvider";
-import { Inverter } from "./inverter";
-
-
 export class Consumption{
     id : number;
-    inverter : Inverter;
-    provider : EnergyProvider;
+    inverter : String;
+    provider : String;
     date : Date;
     consumption : number;
 
-    constructor(id : number, inverter : Inverter, provider : EnergyProvider, date : Date, consumption : number){
+    constructor(id : number, inverterReference : String, providerReference : String, date : Date, consumption : number){
         this.id = id;
-        this.inverter = inverter;
-        this.provider = provider;
+        this.inverter = inverterReference;
+        this.provider = providerReference;
         this.date = date;
         this.consumption = consumption;
     }

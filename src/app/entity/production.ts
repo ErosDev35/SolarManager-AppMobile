@@ -4,16 +4,16 @@ import { MpptService } from "../entityServices/mpptService";
 export class Production{
     id : number;
     date : Date;
-    mppt : Mppt;
+    mppt : Mppt | null;
+    mpptReference : string;
     production : number;
-    mpptService : any;
 
-    constructor(id : number,date : Date, mpptReference : String,production : number)
+    constructor(id : number,date : Date, mpptReference : string,production : number)
     {
-        this.mpptService = new MpptService();
         this.id = id;
         this.date = date;
-        this.mppt = this.mpptService.GetByReference(mpptReference);
+        this.mpptReference = mpptReference;
+        this.mppt = null;
         this.production = production;
     }
 }

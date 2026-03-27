@@ -37,16 +37,21 @@ export class ProductionService{
 
     GetSumOfLatestProductions() : any{
         this.productions = this.GetAll();
+        console.log(this.productions);
         this.mpptDict = new Map<string, number>();
         this.lastProduction = 0;
         
         this.productions.forEach((production) =>
         {
-            if(!this.mpptDict.has(production.mppt[0].reference)){
-                this.mpptDict.set(production.mppt[0].reference, this.dataService.getById("production", production.mppt[0].reference)[this.dataService.getById("production", production.mppt[0].reference).length - 1])
+            if(!this.mpptDict.has(production.mpptReference)){
+                this.mpptDict.set(production.mpptReference, 
+                    this.dataService.getById("production", production.mpptReference)[this.dataService.getById("production", production.mpptReference).length - 1])
                 this.lastProduction += Number.parseFloat(production.production);
+                console.log(this.lastProduction);
             }
         });
+
+        console.log(this.lastProduction);
         return this.lastProduction;
     }
 

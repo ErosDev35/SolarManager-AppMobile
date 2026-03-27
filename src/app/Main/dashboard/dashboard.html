@@ -43,7 +43,7 @@
             <tr style="width: 100%;">
                 <td style="width: 50%; text-align: center;">
                     <i class="pi pi-arrow-circle-up" style="color: rgb(0, 161, 0);"></i>
-                    <p> {{getLastProduction()}} Kwh </p>
+                    <p> {{(getLastProduction())}} Kwh </p>
                 </td>
                 <td style="width: 0%; text-align: center;">
                     <i [ngClass]="getRatioIcon()" [ngStyle]="{ color: getRatio() ? 'rgb(255, 0, 0)' : 'rgb(0, 161, 0)' }"></i>

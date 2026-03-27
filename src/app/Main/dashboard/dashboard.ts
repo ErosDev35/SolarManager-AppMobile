@@ -69,7 +69,6 @@ export class Dashboard{
             this.currentTemp = this.weatherData?.main?.temp ?? null;
             this.currentCloudiness = this.weatherData?.clouds?.all ?? null;
             this.cd.detectChanges();
-            console.log(this.weatherData?.clouds?.all);
           },
           (error) => {
             this.error = 'City not found. Please try again.';
@@ -122,15 +121,15 @@ export class Dashboard{
     return this.productionService.GetSumOfLatestProductions();
   }
   getLastConsommation(){
-    return this.consumptionService.GetSumOfLatestConsumptions();
+    return this.consumptionService.GetLast().consumption;
   }
   getFinalProductionRatio(){
     this.finalRatio = ((this.getRatio())? "" : "+") 
-    + (this.productionService.GetSumOfLatestProductions() - this.consumptionService.GetSumOfLatestConsumptions());
-    return this.finalRatio;
+    + (this.mpptService.GetSumOfAllPower() - this.consumptionService.GetLast().consumption);
+    return 0;
   }
   getRatio(){
-    return this.productionService.GetSumOfLatestProductions() - this.consumptionService.GetSumOfLatestConsumptions() < 0;
+    return this.mpptService.GetSumOfAllPower() - this.consumptionService.GetLast().consumption < 0;
   }
 
   getRatioIcon() : String{
