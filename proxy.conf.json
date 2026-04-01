@@ -1,0 +1,8 @@
+{
+  "/SolarManagerServeur/rest/*": {
+    "target": "http://172.16.79.109:8080",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

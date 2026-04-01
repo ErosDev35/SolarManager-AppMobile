@@ -9,7 +9,7 @@ export class UserService{
 
     GetAll() : any{
         this.dataService = new DataService();
-        const userArray = this.dataService.getEntityData("USER");
+        const userArray = this.dataService.getEntityData("User");
 
         this.users = [];
 
@@ -21,15 +21,13 @@ export class UserService{
     }
 
     GetByLogin(login : String) : any{
-        this.users = this.GetAll();
-        this.user = null;
-        this.users.forEach((user) => {
-            this.username = user.login;
+        this.dataService = new DataService();
+        const userArray = this.dataService.getEntityData("User/" + login);
 
-            if(this.user === null && this.username === login){
-                this.user = user;
-            }
-        })
+        for(let data of userArray.data){
+            this.user = new Agent(data.ID, data.LOGIN, data.PASSWORD);
+        }
+
         return this.user;
     }
 }

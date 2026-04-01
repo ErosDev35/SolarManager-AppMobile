@@ -1,28 +1,35 @@
 import { Injectable } from '@angular/core';
-import jsonData from '../assets/data.json';
-import { Mppt } from '../entity/mppt';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class DataService {
-    data: any = null;
-    deviceGroup : any[] = [];
-    device : any;
+    restfulServerUrl = 'http://172.16.79.109:8080/SolarManagerServeur/rest/';
+    restfullServerLogin = '?login=solaire&pass=zeus';
 
-    getEntityData(entity : String) {
-        this.data = (jsonData as any).default ?? jsonData;
-        const dataArray = Array.isArray(this.data) ? this.data.find((t: any) => t?.type === 'table' && t?.name === entity) : undefined;
-        return dataArray;
+    constructor() {}
+
+    getEntityData(entity: string): { data: any[] } {
+        const finalUrl = this.restfulServerUrl + entity + this.restfullServerLogin;
+        console.log(finalUrl);
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', finalUrl, false);
+        xhr.send();
+
+        if (xhr.status === 200) {
+            console.log(xhr.responseText);
+            const response = JSON.parse(xhr.responseText);
+            console.log(response);
+            return response;
+        } else {
+            console.error('Erreur HTTP:', xhr.status, xhr.statusText);
+            return { data: [] };
+        }
     }
 
     getById(entity : String, id : number){
-        this.deviceGroup = [];
-        const dataArray = this.getEntityData(entity);
-        dataArray.data.forEach((element : any) => {
-            if(element.ID.toString().includes(id)) {
-                this.deviceGroup.push(element);
-            }
-        })
-        return this.deviceGroup;
+        return 1;
     }
 
     getAssociatedDevice(deviceType : String, deviceId : number){
