@@ -52,6 +52,7 @@ export class Dashboard{
   lastProd : number = 0;
   productionRatio : String = "";
   ratioPolarity : boolean = true;
+  allmpptToday: any[] | undefined = undefined;
 
   // Météo
   cityName: string = 'Évreux';
@@ -78,7 +79,6 @@ export class Dashboard{
             document.getElementById('weather-info')?.style.setProperty('display', 'block');
             this.currentTemp = this.weatherData?.main?.temp ?? null;
             this.currentCloudiness = this.weatherData?.clouds?.all ?? null;
-            this.cd.detectChanges();
           },
           (error) => {
             this.error = 'City not found. Please try again.';
@@ -95,21 +95,28 @@ export class Dashboard{
       ];
   selectedTimeframe: timeFrame | undefined;
   
-  ngOnInit() {
-      this.init();
-      this.initChart();
+  async ngOnInit() {
+      await this.init();
+      await this.initChart();
       this.getWeather();
   }
 
-  initChart(){
+  async initChart(){
     this.data = {
       labels: [],
       datasets: [{label: 'Production', data: [], fill: true, tension: 0.4},
         {label: 'Consommation', data: [], fill: true, tension: 0.4}]
     }
-    for(let data of this.productionService.GetAll()){
-      //this.data.labels.push(formatDate(data.date, "hh:mm:ss", 'en-US'));
-      this.data.datasets[0].data.push(data.production);
+    
+    if (this.allmpptToday) {
+      for(let data of this.allmpptToday){
+        if (data.date && !isNaN(data.date.getTime())) {
+          this.data.labels.push(formatDate(data.date, "hh:mm:ss", 'en-US'));
+        } else {
+          this.data.labels.push('N/A');
+        }
+        this.data.datasets[0].data.push(data.production);
+      }
     }
 
     /*for(let data of this.consumptionService.GetAll()){
@@ -117,7 +124,7 @@ export class Dashboard{
     }*/
   }
 
-  init() {
+  async init() {
     this.userService = new UserService();
     this.batteryService = new BatteryService();
     this.consumptionService = new ConsumptionService();
@@ -126,26 +133,27 @@ export class Dashboard{
     this.mpptService = new MpptService();
     this.productionService = new ProductionService();
 
-    this.lastProd = this.getLastProduction();
-    this.ratioPolarity = this.getRatio();
-    this.productionRatio = this.getFinalProductionRatio().toString();
+    this.allmpptToday = await this.mpptService.GetAllOfToday();
+    this.lastProd = await this.getLastProduction();
+    this.ratioPolarity = await this.getRatio();
+    this.productionRatio = (await this.getFinalProductionRatio()).toString();
     this.ratioIcon = this.getRatioIcon();
   }
 
-  getLastProduction(){
-    return this.productionService.GetSumOfLatestProductions();
+  async getLastProduction(){
+    return await this.productionService.GetSumOfLatestProductions();
   }
   /*getLastConsommation(){
     return this.consumptionService.GetLast().consumption;
   }*/
 
-  getFinalProductionRatio(){
+  async getFinalProductionRatio(){
     const finalRatio = ((this.ratioPolarity)? "" : "+") 
-    + (this.mpptService.GetSumOfAllPower() /*- this.consumptionService.GetLast().consumption*/);
+    + (await this.mpptService.GetSumOfAllPower() /*- this.consumptionService.GetLast().consumption*/);
     return finalRatio;
   }
-  getRatio(){
-    return this.mpptService.GetSumOfAllPower() /*- this.consumptionService.GetLast().consumption*/ < 0;
+  async getRatio(){
+    return (await this.mpptService.GetSumOfAllPower()) /*- this.consumptionService.GetLast().consumption*/ < 0;
   }
 
   getRatioIcon() : String{

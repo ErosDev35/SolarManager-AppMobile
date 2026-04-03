@@ -5,9 +5,10 @@ export class EnergyProviderService{
     dataService : any;
     energyProviders : any[] = [];
 
-    GetAll() : any{
+    async GetAll() : Promise<any>{
         this.dataService = new DataService();
-        const userArray = this.dataService.getEntityData("provider");
+        const providerResponse = await this.dataService.getEntityData("provider");
+        const userArray = providerResponse;
 
         this.energyProviders = [];
 

@@ -10,23 +10,42 @@ export class DataService {
 
     constructor() {}
 
-    getEntityData(entity: string): { data: any[] } {
-        const finalUrl = this.restfulServerUrl + entity + this.restfullServerLogin;
+    getEntityData(entity: string): Promise<{ data: any[] }> {
+        return new Promise((resolve, reject) => {
+            const finalUrl = this.restfulServerUrl + entity + this.restfullServerLogin;
 
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', finalUrl, false);
-        xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-        xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-        xhr.setRequestHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-        xhr.send();
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', finalUrl, true); // async true
+            xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+            xhr.setRequestHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-        if (xhr.status === 200) {
-            const response = JSON.parse(xhr.responseText);
-            return response;
-        } else {
-            console.error('Erreur HTTP:', xhr.status, xhr.statusText);
-            return { data: [] };
-        }
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        if (Array.isArray(response)) {
+                            resolve({ data: response });
+                        } else if (response && Array.isArray(response.data)) {
+                            resolve(response);
+                        } else {
+                            resolve({ data: response ? [response] : [] });
+                        }
+                    } catch (e) {
+                        reject(new Error('Erreur de parsing JSON'));
+                    }
+                } else {
+                    console.error('Erreur HTTP:', xhr.status, xhr.statusText);
+                    resolve({ data: [] });
+                }
+            };
+
+            xhr.onerror = () => {
+                reject(new Error('Erreur réseau'));
+            };
+
+            xhr.send();
+        });
     }
 
     getById(entity : String, id : number){

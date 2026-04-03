@@ -8,9 +8,10 @@ export class ConsumptionService{
     consumptionSum : any[] = [];
     mpptDict : any = new Map<string, number>();
 
-    GetAll() : any{
+    async GetAll() : Promise<any>{
         this.dataService = new DataService();
-        const consumptionArray = this.dataService.getEntityData("consumption");
+        const consumptionResponse = await this.dataService.getEntityData("consumption");
+        const consumptionArray = consumptionResponse.data;
 
         this.consumptions = [];
 
@@ -20,8 +21,8 @@ export class ConsumptionService{
         return this.consumptions;
     }
 
-    GetLast() : any{
-        this.consumptions = this.GetAll();
+    async GetLast() : Promise<any>{
+        this.consumptions = await this.GetAll();
         this.lastConsumption = this.consumptions[this.consumptions.length - 1];
         return this.lastConsumption;
     }

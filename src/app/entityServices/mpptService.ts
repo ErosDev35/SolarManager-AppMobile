@@ -12,9 +12,10 @@ export class MpptService{
     data: any = null;
     powerIn : number = 0;
 
-    GetAll() : any{
+    async GetAll() : Promise<any>{
         this.dataService = new DataService();
-        const mpptArray = this.dataService.getEntityData("mppt");
+        const mpptResponse = await this.dataService.getEntityData("mppt");
+        const mpptArray = mpptResponse.data;
 
         this.mppts = [];
 
@@ -34,22 +35,39 @@ export class MpptService{
     }
 
     GetByReference(reference : String) : any{
-        this.mppts = this.GetAll();
-        this.mppts.forEach((mppt) => {
-            this.mpptReference = mppt.reference;
-            if(mppt.reference === reference){
-                this.mpptsToReturn.push(mppt);
-            }
-        })
-        return this.mpptsToReturn;
+        this.dataService = new DataService();
+        const mpptArray = this.dataService.getEntityData("mppt/getByReference/" + reference);
+
+        this.mppts = [];
+
+        for(let data of mpptArray){
+            this.mppts.push(new Mppt(data.ID, data.INTENSITYIN, data.INTENSITYOUT, data.VOLTAGEIN, data.STATUS, data.POWERIN, data.ENERGYOUT,data.REFERENCE, data.DATE));
+        }
+
+        return this.mppts;
     }
 
-    GetSumOfAllPower() : number{
+    async GetSumOfAllPower() : Promise<number>{
         this.powerIn = 0;
-        this.mppts = this.GetAll();
+        this.mppts = await this.GetAll();
         this.mppts.forEach((mppt)=>{
             this.powerIn += mppt.powerIn;
         })
-        return 0;
+        return this.powerIn;
+    }
+
+    async GetAllOfToday() : Promise<any>{
+        this.dataService = new DataService();
+        const mpptResponse = await this.dataService.getEntityData("mppt/getTodayTotal/");
+
+        this.mppts = [];
+
+        for(let data of mpptResponse.data){
+            this.mppt = new Mppt(data.ID, data.INTENSITYIN, data.INTENSITYOUT, data.VOLTAGEIN, data.STATUS, data.POWERIN, data.ENERGYOUT,data.REFERENCE, data.DATE);
+            this.mppt.name = (this.getMpptName(this.mppt) !== undefined)? this.getMpptName(this.mppt) : this.mppt.id;
+            this.mppts.push(this.mppt);
+        }
+        console.log(this.mppts);
+        return this.mppts;
     }
 }

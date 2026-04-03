@@ -5,9 +5,10 @@ export class BatteryService{
     dataService : any;
     batteries : any[] = [];
 
-    GetAll() : any{
+    async GetAll() : Promise<any>{
         this.dataService = new DataService();
-        const batteryArray = this.dataService.getEntityData("battery");
+        const batteryResponse = await this.dataService.getEntityData("battery");
+        const batteryArray = batteryResponse.data;
         
         this.batteries = [];
 

@@ -5,9 +5,10 @@ export class InverterService{
     dataService : any;
     inverters : any[] = [];
 
-    GetAll() : any{
+    async GetAll() : Promise<any>{
         this.dataService = new DataService();
-        const userArray = this.dataService.getEntityData("inverter");
+        const inverterResponse = await this.dataService.getEntityData("inverter");
+        const userArray = inverterResponse;
 
         this.inverters = [];
 

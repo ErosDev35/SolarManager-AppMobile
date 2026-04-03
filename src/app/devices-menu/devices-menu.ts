@@ -24,17 +24,17 @@ export class DevicesMenu {
 
   anyMpptAvailable : boolean = this.mppt[0] != null;
 
-  ngOnInit() {
-      this.init();
+  async ngOnInit() {
+      await this.init();
           window.sessionStorage.setItem('displayDevice', 'false');
 
   }
 
-  init(){
+  async init(){
     this.batteryService = new BatteryService();
     this.mpptService = new MpptService();
-    this.mppt = this.mpptService.GetAll();
-    this.battery = this.batteryService.GetAll();
+    this.mppt = await this.mpptService.GetAll();
+    this.battery = await this.batteryService.GetAll();
 
     this.anyMpptAvailable = this.mppt[0] != null;
   }
