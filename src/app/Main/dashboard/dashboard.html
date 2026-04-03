@@ -43,24 +43,16 @@
             <tr style="width: 100%;">
                 <td style="width: 50%; text-align: center;">
                     <i class="pi pi-arrow-circle-up" style="color: rgb(0, 161, 0);"></i>
-                    <p> {{(getLastProduction())}} Kwh </p>
+                    <p> {{lastProd}} Kwh </p>
                 </td>
                 <td style="width: 0%; text-align: center;">
-                    <i [ngClass]="getRatioIcon()" [ngStyle]="{ color: getRatio() ? 'rgb(255, 0, 0)' : 'rgb(0, 161, 0)' }"></i>
-                    <small> {{getFinalProductionRatio()}} Kwh </small>
+                    <i [ngClass]="ratioIcon" [ngStyle]="{ color: ratioPolarity ? 'rgb(255, 0, 0)' : 'rgb(0, 161, 0)' }"></i>
+                    <small> {{productionRatio}} Kwh </small>
                 </td>
                 <td style="width: 50%; text-align: center;">
                     <i class="pi pi-arrow-circle-down" style="color: rgb(255, 0, 0)"></i>
-                    <p> {{getLastConsommation()}} Kwh </p>
+                    <!-- <p> {{getLastConsommation()}} Kwh </p> -->
                 </td>
-            </tr>
-        </div>
-    </p-card>
-    <p-card [style]="{'height':'100%', padding: '0', 'background-color': '#FFFFFF', 'width':'95%','margin-left':'1.5vh' ,'margin-top':'-2.5vh'}">
-        <div style="display: flex; align-items: center; justify-content: center; padding: 0; width: 100%;">
-            <tr>
-                <p>Egaliser</p>
-                <p-button></p-button>
             </tr>
         </div>
     </p-card>

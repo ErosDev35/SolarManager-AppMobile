@@ -5,7 +5,7 @@ export class UserService{
     dataService : any;
     users : any[] = [];
     username : String = "";
-    user : any = null;
+    user : Agent = new Agent(0,"","");
 
     GetAll() : any{
         this.dataService = new DataService();
@@ -13,7 +13,7 @@ export class UserService{
 
         this.users = [];
 
-        for(let data of userArray.data){
+        for(let data of userArray){
             this.users.push(new Agent(data.ID, data.LOGIN, data.PASSWORD));
         }
 
@@ -22,11 +22,10 @@ export class UserService{
 
     GetByLogin(login : String) : any{
         this.dataService = new DataService();
-        const userArray = this.dataService.getEntityData("User/" + login);
+        const userArray : any[] = [];
+        userArray.push(this.dataService.getEntityData("User/" + login));
 
-        for(let data of userArray.data){
-            this.user = new Agent(data.ID, data.LOGIN, data.PASSWORD);
-        }
+        this.user = new Agent(userArray[0].id,userArray[0].login,userArray[0].password);
 
         return this.user;
     }

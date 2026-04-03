@@ -20,6 +20,7 @@ import { EnergyProviderService } from '../../entityServices/energyProviderServic
 import { InverterService } from '../../entityServices/inverterService';
 import { MpptService } from '../../entityServices/mpptService';
 import { ProductionService } from '../../entityServices/productionService';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 interface timeFrame {
     name: string;
@@ -31,11 +32,13 @@ interface timeFrame {
   imports: [CommonModule, AppAllPrimeng],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class Dashboard{
   options: any;
   data : any;
+
   userService : any;
   batteryService : any;
   consumptionService : any;
@@ -43,7 +46,14 @@ export class Dashboard{
   inverterService : any;
   mpptService : any;
   productionService : any;
-  finalRatio : String = "";
+
+  //Resumé des stats
+  ratioIcon : String = "";
+  lastProd : number = 0;
+  productionRatio : String = "";
+  ratioPolarity : boolean = true;
+
+  // Météo
   cityName: string = 'Évreux';
   weatherData: any;
   currentDate: string = '';
@@ -98,13 +108,13 @@ export class Dashboard{
         {label: 'Consommation', data: [], fill: true, tension: 0.4}]
     }
     for(let data of this.productionService.GetAll()){
-      this.data.labels.push(formatDate(data.date, "hh:mm:ss", 'en-US'));
+      //this.data.labels.push(formatDate(data.date, "hh:mm:ss", 'en-US'));
       this.data.datasets[0].data.push(data.production);
     }
 
-    for(let data of this.consumptionService.GetAll()){
+    /*for(let data of this.consumptionService.GetAll()){
       this.data.datasets[1].data.push(data.consumption);
-    }
+    }*/
   }
 
   init() {
@@ -115,32 +125,32 @@ export class Dashboard{
     this.inverterService = new InverterService();
     this.mpptService = new MpptService();
     this.productionService = new ProductionService();
+
+    this.lastProd = this.getLastProduction();
+    this.ratioPolarity = this.getRatio();
+    this.productionRatio = this.getFinalProductionRatio().toString();
+    this.ratioIcon = this.getRatioIcon();
   }
 
   getLastProduction(){
     return this.productionService.GetSumOfLatestProductions();
   }
-  getLastConsommation(){
+  /*getLastConsommation(){
     return this.consumptionService.GetLast().consumption;
-  }
+  }*/
+
   getFinalProductionRatio(){
-    this.finalRatio = ((this.getRatio())? "" : "+") 
-    + (this.mpptService.GetSumOfAllPower() - this.consumptionService.GetLast().consumption);
-    return 0;
+    const finalRatio = ((this.ratioPolarity)? "" : "+") 
+    + (this.mpptService.GetSumOfAllPower() /*- this.consumptionService.GetLast().consumption*/);
+    return finalRatio;
   }
   getRatio(){
-    return this.mpptService.GetSumOfAllPower() - this.consumptionService.GetLast().consumption < 0;
+    return this.mpptService.GetSumOfAllPower() /*- this.consumptionService.GetLast().consumption*/ < 0;
   }
 
   getRatioIcon() : String{
-    this.finalRatio = (this.getRatio())? 
+    const finalRatio = (this.ratioPolarity)? 
     "pi pi-arrow-down" : "pi pi-arrow-up"
-    return this.finalRatio;
-  }
-
-  getRationColor() : String{
-    this.finalRatio = (this.getRatio())? 
-    "color: rgb(255, 0, 0)" : "color: rgb(0, 161, 0);"
-    return this.finalRatio;
+    return finalRatio;
   }
 }

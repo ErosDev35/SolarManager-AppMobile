@@ -4,23 +4,24 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DataService {
-    restfulServerUrl = 'http://172.16.79.109:8080/SolarManagerServeur/rest/';
+    restfulServerUrl = 'http://localhost:3000/api/SolarManagerServeur/rest/';
     restfullServerLogin = '?login=solaire&pass=zeus';
+    lastEntityLog : any = null;
 
     constructor() {}
 
     getEntityData(entity: string): { data: any[] } {
         const finalUrl = this.restfulServerUrl + entity + this.restfullServerLogin;
-        console.log(finalUrl);
 
         const xhr = new XMLHttpRequest();
         xhr.open('GET', finalUrl, false);
+        xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+        xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        xhr.setRequestHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
         xhr.send();
 
         if (xhr.status === 200) {
-            console.log(xhr.responseText);
             const response = JSON.parse(xhr.responseText);
-            console.log(response);
             return response;
         } else {
             console.error('Erreur HTTP:', xhr.status, xhr.statusText);

@@ -14,11 +14,11 @@ export class MpptService{
 
     GetAll() : any{
         this.dataService = new DataService();
-        const userArray = this.dataService.getEntityData("mppt");
+        const mpptArray = this.dataService.getEntityData("mppt");
 
         this.mppts = [];
 
-        for(let data of userArray.data){
+        for(let data of mpptArray){
             this.mppt = new Mppt(data.ID, data.INTENSITYIN, data.INTENSITYOUT, data.VOLTAGEIN, data.STATUS, data.POWERIN, data.ENERGYOUT,data.REFERENCE, data.DATE);
             this.mppt.name = (this.getMpptName(this.mppt) !== undefined)? this.getMpptName(this.mppt) : this.mppt.id;
             this.mppts.push(this.mppt);

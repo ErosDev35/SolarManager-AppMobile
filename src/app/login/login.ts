@@ -1,4 +1,4 @@
-import { Injectable, OnInit, Component } from '@angular/core';
+import { Injectable, OnInit, Component, ChangeDetectionStrategy } from '@angular/core';
 import { AppAllPrimeng } from '../assets/appAllPrimeng.module';
 
 import { User } from '../entity/user';
@@ -11,6 +11,7 @@ import { UserService } from '../entityServices/userService';
   imports: [AppAllPrimeng],
   templateUrl: './login.html',
   styleUrl: './login.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 @Injectable({
   providedIn: 'root',

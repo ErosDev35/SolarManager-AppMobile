@@ -9,9 +9,11 @@ export class ProductionService{
 
     GetAll() : any{
         this.dataService = new DataService();
-        const userArray = this.dataService.getEntityData("production");
+        const productionArray = this.dataService.getEntityData("production");
+        console.log(productionArray);
         this.productions = [];
-        for(let data of userArray.data){
+
+        for(let data of productionArray){
             this.productions.push(new Production(data.ID,data.DATE,data.mppt_reference,data.PRODUCTION));
             console.log()
         }
@@ -25,14 +27,8 @@ export class ProductionService{
     }
     
     GetByMpptReference(reference : String) : any{
-        this.productions = this.GetAll();
-        this.productions.forEach((production) =>
-        {
-            if(!production.mppt[0].reference.toString().includes(reference)){
-                this.productions.splice(this.productions.indexOf(production,1))
-            }
-        })
-        return this.productions;
+        this.dataService = new DataService();
+        return this.dataService.getEntityData("production/");
     }
 
     GetSumOfLatestProductions() : any{

@@ -10,11 +10,11 @@ export class ConsumptionService{
 
     GetAll() : any{
         this.dataService = new DataService();
-        const userArray = this.dataService.getEntityData("consumption");
+        const consumptionArray = this.dataService.getEntityData("consumption");
 
         this.consumptions = [];
 
-        for(let data of userArray.data){
+        for(let data of consumptionArray){
             this.consumptions.push(new Consumption(data.ID, data.inverter_id, data.provider_id, data.DATE, data.CONSUMPTION));
         }
         return this.consumptions;

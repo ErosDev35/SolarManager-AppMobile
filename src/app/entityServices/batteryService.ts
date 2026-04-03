@@ -7,11 +7,11 @@ export class BatteryService{
 
     GetAll() : any{
         this.dataService = new DataService();
-        const userArray = this.dataService.getEntityData("battery");
+        const batteryArray = this.dataService.getEntityData("battery");
         
         this.batteries = [];
 
-        for(let data of userArray.data){
+        for(let data of batteryArray){
             this.batteries.push(new Battery(data.ID, data.NAME, data.STATEOFHEALTH, data.INTENSITY, data.DATE, data.VOLTAGE));
         }
 
